@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: SpringRestConsul
+    
+banner:
+  charset: UTF-8
+  location: custombanner.txt
+
+    

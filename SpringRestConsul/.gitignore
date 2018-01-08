@@ -1,0 +1,37 @@
+# compiled output
+.class
+/bin
+bin/
+/build
+build/
+/build-eclipse
+build-eclipse/
+/target
+target/
+/.gradle
+.gradle/**
+gradle/**
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.class
+*.jar
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db

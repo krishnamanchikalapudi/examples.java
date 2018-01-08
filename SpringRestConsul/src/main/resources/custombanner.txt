@@ -1,0 +1,1 @@
+Spring Rest Consul with Boot example

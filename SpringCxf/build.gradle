@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework:spring-webmvc:5.0.2.RELEASE")
+        classpath("javax.ws.rs:jsr311-api:1.1.1")
+        classpath("org.apache.cxf:cxf-rt-frontend-jaxrs:3.2.1")
+        classpath("org.apache.cxf:cxf-rt-transports-http:3.2.1")
+        classpath("com.fasterxml.jackson.core:jackson-annotations:2.9.3")
+        classpath("com.fasterxml.jackson.core:jackson-databind:2.9.3")
+        classpath("com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.9.3")
+        classpath("javax.servlet:javax.servlet-api:3.1.0")
+    }
+}
+
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile ("org.springframework:spring-webmvc:5.0.2.RELEASE")
+    compile("javax.ws.rs:jsr311-api:1.1.1")
+    compile("org.apache.cxf:cxf-rt-frontend-jaxrs:3.2.1")
+    compile("org.apache.cxf:cxf-rt-transports-http:3.2.1")
+    compile("com.fasterxml.jackson.core:jackson-annotations:2.9.3")
+    compile("com.fasterxml.jackson.core:jackson-databind:2.9.3")
+    compile("com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.9.3")
+    compile("javax.servlet:javax.servlet-api:3.1.0")
+}

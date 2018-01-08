@@ -1,0 +1,15 @@
+banner:
+  charset: UTF-8
+  location: custombanner.txt
+
+spring:
+  main:
+    banner-mode: off
+
+server:
+  context-path: /springrestboot
+  port: 8080
+  tomcat:
+    max-connections: 20
+    
+    
