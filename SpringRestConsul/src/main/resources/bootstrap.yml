@@ -2,6 +2,10 @@ spring:
   application:
     name: SpringRestConsul
     
+server:
+  context-path: /SpringRestConsul
+  port: 8080
+    
 banner:
   charset: UTF-8
   location: custombanner.txt

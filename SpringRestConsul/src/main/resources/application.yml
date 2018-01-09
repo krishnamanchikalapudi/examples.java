@@ -21,4 +21,6 @@ spring:
       port: 8500
       discovery:
         health-check-interval: 10s
-        health-check-path: /health
+        health-check-path: /SpringRestConsul/health
+        tags:
+        - spring

@@ -24,6 +24,7 @@ public class ApiResource {
 	public String home() {
 		return "Welcome to Spring Rest + Boot example";
 	}
+	/*
 	@RequestMapping(value = { Constants.URL_HEALTH }, method = RequestMethod.GET, consumes = {
 			MediaType.ALL_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody ResponseEntity<String> health(@PathVariable String id, @RequestHeader HttpHeaders reqHeaders) {
@@ -31,7 +32,7 @@ public class ApiResource {
 		String resp = "{ \"status\" : \"200\", \"message\": \"SpringRestConsul\"}";
 		return new ResponseEntity<String>(resp, HttpStatus.OK);
 	}
-
+*/
 	@RequestMapping(value = { Constants.URL_PERSON_BY_ID }, method = RequestMethod.GET, consumes = {
 			MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody ResponseEntity<Person> jsonId(@PathVariable String id, @RequestHeader HttpHeaders reqHeaders) {

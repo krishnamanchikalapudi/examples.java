@@ -21,7 +21,6 @@ gradle/**
 .settings/
 *.sublime-workspace
 *.class
-*.jar
 
 # misc
 /.sass-cache
