@@ -15,6 +15,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // disable caching
+         http.headers().cacheControl();
+        
+         http.csrf().disable() // disable csrf for our requests.
+             .authorizeRequests()
+             .antMatchers("/").permitAll()
+             .antMatchers("/live").permitAll();
     }
 
     @Override
