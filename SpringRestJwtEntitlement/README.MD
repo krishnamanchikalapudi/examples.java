@@ -8,4 +8,6 @@
 
 # Dev guidelines
 - Execute spring boot service on local machine.
-- Deploy to AWS. Refer instructions at https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/
+- To start securing, I want to avoid exposing http://localhost:8080/v1/${id} to everyone, so I will create a configuration that forbids this.
+- Everyone can access /v1/, and the /v1/live route using POST/GET.
+- Secure /v1/${id} '/v1/123' to users whom can provide a valid JWT token.
