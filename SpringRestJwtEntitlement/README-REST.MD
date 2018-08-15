@@ -39,6 +39,7 @@ Welcome to Spring Rest + Boot example
 - Request: header
 ```
 content-type:application/json
+jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJwZXJzb24iXSwiY2xpZW50X2lkIjoiMTIzNDU2Nzg5MCIsIm5hbWUiOiJLcmlzaG5hIE1hbmNoaWthbGFwdWRpIiwibGlua2VkaW4iOiJodHRwczovL3d3dy5saW5rZWRpbi5jb20vaW4va3Jpc2huYW1hbmNoaWthbGFwdWRpLyJ9.V3ULTMni3_iO078IDLiVdLWFmK28wRUwV-k0b0-ytE0
 ```
 - Request: body
 ```
