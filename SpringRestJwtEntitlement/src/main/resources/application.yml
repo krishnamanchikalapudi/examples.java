@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: SpringRestJwtEntitlement
+
+server:
+  servlet:
+    context-path: /
+    
+logging:
+  level:
+    root: INFO
+  pattern:
+    console: "[%p] %d %c %M - %m%n"
+ 

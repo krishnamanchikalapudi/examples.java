@@ -1,0 +1,56 @@
+group = 'com.example.jwt'
+version = '1.0.0-SNAPSHOT'
+
+buildscript {
+	ext {
+		springBootVersion = '2.0.4.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+bootRun {
+	jvmArgs = ["-XX:MaxPermSize=256m", "-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.security.oauth:spring-security-oauth2:2.3.3.RELEASE')
+	// compile('org.springframework.cloud:spring-cloud-starter-oauth2')
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+
+bootWar {
+	excludeDevtools = false
+	manifest {
+		attributes 'Start-Class': 'com.example.jwt.config.SpringRestJwtEntitlementApplication'
+	}
+    mainClassName = 'com.example.jwt.config.SpringRestJwtEntitlementApplication'
+    baseName 'springrestjwtentitlement'
+	  version '1.0.0'
+    archiveName 'springrestjwtentitlement.war'
+}
+bootRun {
+    main = 'com.example.jwt.config.SpringRestJwtEntitlementApplication'
+    systemProperties = System.properties
+}
