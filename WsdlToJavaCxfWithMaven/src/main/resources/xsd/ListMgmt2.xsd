@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<xs:schema xmlns:tns="SilverpopApi:EngageService.ListMgmt.RecipientActions" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="SilverpopApi:EngageService.ListMgmt.RecipientActions">
+  <xs:simpleType name="ListMgmtSuccess">
+    <xs:restriction base="xs:boolean">
+      <xs:pattern value="true" />
+      <xs:pattern value="false" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EmailType">
+    <xs:annotation>
+      <xs:documentation>HTML(0), Text(1), AOL(2)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="0" />
+      <xs:enumeration value="1" />
+      <xs:enumeration value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CreatedFrom">
+    <xs:annotation>
+      <xs:documentation>Imported from a list (0), Manually added(1), Opted in(2), Created from tracking list(3)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="0" />
+      <xs:enumeration value="1" />
+      <xs:enumeration value="2" />
+      <xs:enumeration value="3" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateTime1">
+    <xs:annotation>
+      <xs:documentation>m/d/yy h:mm AM</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="|(1[0-2]|[0-9])/([1-9]|[1-2][0-9]|3[0-1])/([0-9][0-9]) ([1-9]|1[0-2]):([0-5][0-9]) ([A|P]M)"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Date1">
+    <xs:annotation>
+      <xs:documentation>mm/dd/yyyy</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="|(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/([0-9][0-9][0-9][0-9])"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="True">
+    <xs:restriction base="xs:boolean">
+      <xs:pattern value="true" />
+      <xs:pattern value="false" />
+    </xs:restriction>
+  </xs:simpleType>
+  			<xs:complexType name="FaultErrorType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="errorid" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="module" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="class" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="method" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FaultDetailType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="error" type="tns:FaultErrorType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FaultType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="Request" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="FaultCode" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="FaultString" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="detail" type="tns:FaultDetailType"/>
+				</xs:sequence>
+			</xs:complexType>
+  <xs:complexType name="ListMgmtResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SUCCESS" type="tns:ListMgmtSuccess"/>
+      <xs:element minOccurs="0" name="Fault" type="tns:FaultType"/>
+      <xs:element minOccurs="0" name="EMAIL" type="xs:string"/>
+      <xs:element minOccurs="0" name="Email" type="xs:string"/>
+      <xs:element minOccurs="0" name="RecipientId" type="xs:string"/>
+      <xs:element minOccurs="0" name="EmailType" type="tns:EmailType"/>
+      <xs:element minOccurs="0" name="LastModified" type="tns:DateTime1"/>
+      <xs:element minOccurs="0" name="CreatedFrom" type="tns:CreatedFrom"/>
+      <xs:element minOccurs="0" name="OptedIn" type="tns:DateTime1"/>
+      <xs:element minOccurs="0" name="OptedOut" type="tns:DateTime1"/>
+      <xs:element minOccurs="0" name="ResumeSendDate" type="tns:Date1"/> 
+      <xs:element minOccurs="0" name="ORGANIZATION_ID" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="VISITOR_ASSOCIATION" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="COLUMNS" type="tns:ColumnsElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="CONTACT_LISTS" type="tns:ContactListsElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddRecipientRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="CREATED_FROM" type="tns:CreatedFrom"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="SEND_AUTOREPLY" type="tns:True"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="UPDATE_IF_FOUND" type="tns:True"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="ALLOW_HTML" type="tns:True"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="COLUMN" type="tns:ColumnElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SYNC_FIELDS" type="tns:SyncFieldsElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="VISITOR_KEY" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OptOutRecipientRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="EMAIL" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="COLUMN" type="tns:ColumnElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="MAILING_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="RECIPIENT_ID" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="JOB_ID" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdateRecipientRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="OLD_EMAIL" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="RECIPIENT_ID" type="xs:long"/>         
+      <xs:element minOccurs="0" maxOccurs="1" name="ENCODED_RECIPIENT_ID" type="xs:string"/>    
+      <xs:element minOccurs="1" maxOccurs="1" name="SEND_AUTOREPLY" type="tns:True"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="ALLOW_HTML" type="tns:True"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="COLUMN" type="tns:ColumnElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SYNC_FIELDS" type="tns:SyncFieldsElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="VISITOR_KEY" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SelectRecipientRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="EMAIL" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="ENCODED_RECIPIENT_ID" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="RETURN_CONTACT_LISTS" type="tns:ListMgmtSuccess"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="COLUMN" type="tns:ColumnElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DoubleOptInRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="SEND_AUTOREPLY" type="tns:True"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="ALLOW_HTML" type="tns:True"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="COLUMN" type="tns:ColumnElementType"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="TABLES" type="tns:TablesElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ColumnsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="COLUMN" type="tns:ColumnElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContactListsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="CONTACT_LIST_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SyncFieldsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="SYNC_FIELD" type="tns:ColumnElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TableColumnsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="COLUMN" type="tns:ColumnElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TableElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TABLE_NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="TABLE_COLUMNS" type="tns:TableColumnsElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ColumnElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="VALUE" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TablesElementType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TABLE" type="tns:TableElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AddRecipient" type="tns:AddRecipientRequestType"/>
+  <xs:element name="RESULT" type="tns:ListMgmtResponseType"/>
+  <xs:element name="OptOutRecipient" type="tns:OptOutRecipientRequestType"/>
+  <xs:element name="UpdateRecipient" type="tns:UpdateRecipientRequestType"/>
+  <xs:element name="SelectRecipientData" type="tns:SelectRecipientRequestType"/>
+  <xs:element name="DoubleOptInRecipient" type="tns:DoubleOptInRequestType"/>
+</xs:schema>

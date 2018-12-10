@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<xs:schema xmlns:tns="SilverpopApi:EngageService.SessionHeader" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="SilverpopApi:EngageService.SessionHeader">
+  <xs:element name="sessionHeader" type="tns:sessionheadertype"/>
+  <xs:complexType name="sessionheadertype">
+    <xs:sequence>
+      <xs:element name="sessionid" type="xs:string"/>
+    </xs:sequence>
+    <xs:anyAttribute namespace="##other" processContents="lax"/>
+  </xs:complexType>
+</xs:schema>

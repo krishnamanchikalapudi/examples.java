@@ -1,0 +1,8 @@
+{
+	
+  "NodeServer": {
+    "ContextPath": "/NodeRest/v1",
+    "host": {
+      "port": 3885
+    }
+}

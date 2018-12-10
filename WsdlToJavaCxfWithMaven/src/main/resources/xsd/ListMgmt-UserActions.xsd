@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<xs:schema xmlns:tns="SilverpopApi:EngageService.ListMgmt.UserActions" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="SilverpopApi:EngageService.ListMgmt.UserActions">
+   <xs:simpleType name="ListMgmtUserSuccess">
+    <xs:restriction base="xs:boolean">
+      <xs:pattern value="true" />
+      <xs:pattern value="false" />
+    </xs:restriction>
+  </xs:simpleType> 
+  <xs:simpleType name="True">
+    <xs:restriction base="xs:boolean">
+      <xs:pattern value="true" />
+      <xs:pattern value="false" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FileEncoding">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UTF-8" />
+      <xs:enumeration value="ISO-8859-1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ListTypeId">
+    <xs:annotation>
+      <xs:documentation>Regular(0),Queries(1),Regular and Queries(2),Test(5),Seed Lists(6),Suppression(13),Relational Tables(15),Contact Lists(18)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="0" />
+      <xs:enumeration value="1" />
+      <xs:enumeration value="2" />
+      <xs:enumeration value="5" />
+      <xs:enumeration value="6" />
+      <xs:enumeration value="13" />
+      <xs:enumeration value="15" />
+      <xs:enumeration value="18" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ListColumnType">
+    <xs:annotation>
+      <xs:documentation>Text(0),YES/No(1),Numeric(2),Date(3),Time(4),Country(5),Select one(6),Segmenting(7),EMAIL(9),Timestamp(17),MultiSelect(20)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="0" />
+      <xs:enumeration value="1" />
+      <xs:enumeration value="2" />
+      <xs:enumeration value="3" />
+      <xs:enumeration value="4" />
+      <xs:enumeration value="5" />
+      <xs:enumeration value="6" />
+      <xs:enumeration value="8" />
+      <xs:enumeration value="9" />
+      <xs:enumeration value="17" />
+      <xs:enumeration value="20" />
+    </xs:restriction>
+  </xs:simpleType>  
+  <xs:simpleType name="TableColumnType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TEXT" />
+      <xs:enumeration value="YESNO" />
+      <xs:enumeration value="NUMERIC" />
+      <xs:enumeration value="DATE" />
+      <xs:enumeration value="TIME" />
+      <xs:enumeration value="COUNTRY" />
+      <xs:enumeration value="SELECTION" />
+      <xs:enumeration value="EMAIL" />
+      <xs:enumeration value="DATE_TIME" />
+      <xs:enumeration value="SYNC_ID" />
+    </xs:restriction>
+  </xs:simpleType>  
+  <xs:simpleType name="Visibility">
+    <xs:annotation>
+      <xs:documentation>Private(0),Shared(1)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="0" />
+      <xs:enumeration value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ExportType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ALL" />
+      <xs:enumeration value="OPT_IN" />
+      <xs:enumeration value="OPT_OUT" />
+      <xs:enumeration value="UNDELIVERABLE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ListTableExportFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CSV" />
+      <xs:enumeration value="TAB" />
+      <xs:enumeration value="PIPE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AllowFieldChange">
+    <xs:restriction base="xs:boolean">
+      <xs:pattern value="0" />
+      <xs:pattern value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OptionOperator">
+    <xs:annotation>
+      <xs:documentation>Opened(100),Clicked(101),Bounced(102),No Activity(103)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="100" />
+      <xs:enumeration value="101" />
+      <xs:enumeration value="102" />
+      <xs:enumeration value="103" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TypeOperator">
+    <xs:annotation>
+      <xs:documentation>Any Mailing(110),One Mailing(111)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="110" />
+      <xs:enumeration value="111" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WhereOperator">
+    <xs:annotation>
+      <xs:documentation>Days Since Activity(120),Activity Date(121),Activity Count(122)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="120" />
+      <xs:enumeration value="121" />
+      <xs:enumeration value="122" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CriteriaOperator">
+	  <xs:restriction base="xs:string">
+		  <xs:enumeration value="!="/>
+		  <xs:enumeration value="&lt;="/>
+		  <xs:enumeration value="&gt;="/>
+		  <xs:enumeration value="&lt;"/>
+		  <xs:enumeration value="&gt;"/>
+		  <xs:enumeration value="="/>
+		  <xs:enumeration value="BETWEEN"/>
+	  </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CriteriaType">
+	  <xs:restriction base="xs:string">
+		  <xs:enumeration value="Locked"/>
+		  <xs:enumeration value="Editable"/>
+	  </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ExpressionType">
+    <xs:annotation>
+      <xs:documentation>Text(TE),Numeric(NE),Date(DE)</xs:documentation>
+    </xs:annotation>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="TE"/>
+		<xs:enumeration value="NE"/>
+		<xs:enumeration value="DE"/>
+	  </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Operators">
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="!="/>
+		<xs:enumeration value="&lt;="/>
+		<xs:enumeration value="&gt;="/>
+		<xs:enumeration value="&lt;"/>
+		<xs:enumeration value="&gt;"/>
+		<xs:enumeration value="="/>
+		<xs:enumeration value="IS NOT null"/>
+		<xs:enumeration value="IS null"/>
+		<xs:enumeration value="LIKE"/>
+		<xs:enumeration value="NOT like"/>
+		<xs:enumeration value="IN"/>
+		<xs:enumeration value="NOT in"/>
+		<xs:enumeration value="BETWEEN"/>
+	</xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LeftParens">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([(])*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RightParens">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([)])*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AndOr">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AND" />
+      <xs:enumeration value="OR" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateTime1">
+    <xs:annotation>
+      <xs:documentation>m/d/yy h:mm AM</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(1[0-2]|[0-9])/([1-9]|[1-2][0-9]|3[0-1])/([0-9][0-9]) ([1-9]|1[0-2]):([0-5][0-9]) ([A|P]M)"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateTime2">
+    <xs:annotation>
+      <xs:documentation>mm/dd/yy hh:mm AM</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="((0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/([0-9][0-9]) (0[1-9]|1[0-2]):([0-5][0-9]) ([A|P]M))|Never"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateTime3">
+    <xs:annotation>
+      <xs:documentation>mm/dd/yyyy hh:mm:ss</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/([0-9][0-9][0-9][0-9]) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])"/>
+    </xs:restriction>
+  </xs:simpleType>
+			<xs:complexType name="FaultErrorType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="errorid" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="module" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="class" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="method" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FaultDetailType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="error" type="tns:FaultErrorType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FaultType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="Request" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="FaultCode" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="FaultString" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="detail" type="tns:FaultDetailType"/>
+				</xs:sequence>
+			</xs:complexType>
+  <xs:complexType name="ImportListRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="MAP_FILE" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="SOURCE_FILE" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="FILE_ENCODING" type="tns:FileEncoding"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListMgmtUserActionsResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SUCCESS" type="tns:ListMgmtUserSuccess"/>
+      <xs:element minOccurs="0" name="Fault" type="tns:FaultType"/>
+      <xs:element minOccurs="0" name="JOB_ID" type="xs:long"/>
+      <xs:element minOccurs="0" name="FILE_PATH" type="xs:string"/>
+      <xs:element minOccurs="0" name="ID" type="xs:long"/>
+      <xs:element minOccurs="0" name="NAME" type="xs:string"/>
+      <xs:element minOccurs="0" name="TYPE" type="tns:ListTypeId"/>
+      <xs:element minOccurs="0" name="SIZE" type="xs:int"/>
+      <xs:element minOccurs="0" name="NUM_OPT_OUTS" type="xs:int"/>
+      <xs:element minOccurs="0" name="NUM_UNDELIVERABLE" type="xs:int"/>
+      <xs:element minOccurs="0" name="LAST_MODIFIED" type="tns:DateTime2"/>
+      <xs:element minOccurs="0" name="LAST_CONFIGURED" type="tns:DateTime2"/>
+      <xs:element minOccurs="0" name="CREATED" type="tns:DateTime2"/>
+      <xs:element minOccurs="0" name="VISIBILITY" type="tns:Visibility"/>
+      <xs:element minOccurs="0" name="USER_ID" type="xs:string"/>
+      <xs:element minOccurs="0" name="ORGANIZATION_ID" type="xs:string"/>
+      <xs:element minOccurs="0" name="OPT_IN_FORM_DEFINED" type="tns:True"/>
+      <xs:element minOccurs="0" name="OPT_OUT_FORM_DEFINED" type="tns:True"/>
+      <xs:element minOccurs="0" name="PROFILE_FORM_DEFINED" type="tns:True"/>
+      <xs:element minOccurs="0" name="OPT_IN_AUTOREPLY_DEFINED" type="tns:True"/>
+      <xs:element minOccurs="0" name="PROFILE_AUTOREPLY_DEFINED" type="tns:True"/>
+      <xs:element minOccurs="0" name="SMS_KEYWORD" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="COLUMNS" type="tns:ColumnsElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SELECTION_VALUES" type="tns:SelectionValuesElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="KEY_COLUMNS" type="tns:ColumnsElementType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Mailing" type="tns:MailingElementType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="LIST" type="tns:ListElementType"/>
+      <xs:element minOccurs="0" name="TABLE_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="FAILURES" type="tns:FailuresElementType"/>      
+      <xs:element minOccurs="0" maxOccurs="1" name="CONTACT_LIST_ID" type="xs:long"/> 
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="TYPE" type="tns:ListTypeId"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="SIZE" type="xs:int"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="NUM_OPT_OUTS" type="xs:int"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="NUM_UNDELIVERABLE" type="xs:int"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="LAST_MODIFIED" type="tns:DateTime2"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="VISIBILITY" type="tns:Visibility"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="PARENT_NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="USER_ID" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="PARENT_FOLDER_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="IS_FOLDER" type="tns:True"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="FLAGGED_FOR_BACKUP" type="tns:True"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SUPPRESSION_LIST_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MailingElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="MailingName" type="xs:string"/>
+      <xs:element minOccurs="1" name="MailingId" type="xs:long"/>
+      <xs:element minOccurs="1" name="SentTS" type="tns:DateTime1"/>
+      <xs:element minOccurs="1" name="TotalOpens" type="xs:int"/>
+      <xs:element minOccurs="1" name="TotalClickstreams" type="xs:int"/>
+      <xs:element minOccurs="1" name="TotalClicks" type="xs:int"/>
+      <xs:element minOccurs="1" name="TotalConversions" type="xs:int"/>
+      <xs:element minOccurs="1" name="TotalAttachments" type="xs:int"/>
+      <xs:element minOccurs="1" name="TotalForwards" type="xs:int"/>
+      <xs:element minOccurs="1" name="TotalMediaPlays" type="xs:int"/>
+      <xs:element minOccurs="1" name="TotalBounces" type="xs:int"/>
+      <xs:element minOccurs="1" name="TotalOptOuts" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RemoveRecipientRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="EMAIL" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="COLUMN" type="tns:ColumnNameValueElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ColumnNameValueElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="NAME" type="xs:string"/>
+      <xs:element minOccurs="1" name="VALUE" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ImportRecipientFieldDataRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="COLUMN" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="SOURCE_FILE" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="COMPLETION_EMAIL" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="ERROR_EMAIL" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="FILE_ENCODING" type="tns:FileEncoding"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExportListRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="EMAIL" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="EXPORT_TYPE" type="tns:ExportType"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="EXPORT_FORMAT" type="tns:ListTableExportFormat"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="FILE_ENCODING" type="tns:FileEncoding"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="ADD_TO_STORED_FILES" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="DATE_START" type="tns:DateTime3"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="DATE_END" type="tns:DateTime3"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetListMetaDataRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ColumnsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="COLUMN" type="tns:ColumnElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ColumnElementType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="NAME" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="DEFAULT_VALUE" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="TYPE" type="tns:ListColumnType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SELECTION_VALUES" type="tns:SelectionValuesElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TableColumnsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="COLUMN" type="tns:TableColumnElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TableColumnElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="TYPE" type="tns:TableColumnType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="IS_REQUIRED" type="tns:True"/>      
+      <xs:element minOccurs="0" maxOccurs="1" name="KEY_COLUMN" type="tns:True"/>    
+      <xs:element minOccurs="0" maxOccurs="1" name="DEFAULT_VALUE" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SELECTION_VALUES" type="tns:SelectionValuesElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RowsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ROW" type="tns:RowElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RowElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="COLUMN" type="tns:RowColumnElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RowColumnElementType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DeleteRowsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ROW" type="tns:DeleteRowElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeleteRowElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="KEY_COLUMN" type="tns:ColumnNameElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ColumnNameElementType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SelectionValuesElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="VALUE" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FailuresElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="FAILURE" type="tns:FailureElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FailureElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="COLUMN" type="tns:ColumnNameElementType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="KEY_COLUMN" type="tns:ColumnNameElementType"/>
+    </xs:sequence>
+    <xs:attribute name="failure_type" type="xs:string" use="required"/>
+    <xs:attribute name="description" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="GetListsRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="VISIBILITY" type="tns:Visibility"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_TYPE" type="tns:ListTypeId"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="FOLDER_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="INCLUDE_ALL_LISTS" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListRecipientMailingsRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="RECIPIENT_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ImportTableRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="MAP_FILE" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="SOURCE_FILE" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="JoinTableRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_NAME" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_VISIBILITY" type="tns:Visibility"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="LIST_NAME" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="LIST_VISIBILITY" type="tns:Visibility"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="REMOVE" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="EMAIL" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="MAP_FIELD" type="tns:MapFieldElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MapFieldElementType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LIST_FIELD" type="xs:string"/>
+      <xs:element minOccurs="0" name="TABLE_FIELD" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExportTableRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_NAME" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_VISIBILITY" type="tns:Visibility"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="EMAIL" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="EXPORT_FORMAT" type="tns:ListTableExportFormat"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="ADD_TO_STORED_FILES" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="DATE_START" type="tns:DateTime3"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="DATE_END" type="tns:DateTime3"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeleteTableRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_NAME" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_VISIBILITY" type="tns:Visibility"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="EMAIL" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateQueryRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="QUERY_NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="PARENT_LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="VISIBILITY" type="tns:Visibility"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="PARENT_FOLDER_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="ALLOW_FIELD_CHANGE" type="tns:AllowFieldChange"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SELECT_COLUMNS" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="CRITERIA" type="tns:CriteriaElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="BEHAVIOR" type="tns:BehaviorElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CalculateQueryRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="QUERY_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="EMAIL" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BehaviorElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="OPTION_OPERATOR" type="tns:OptionOperator"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="TYPE_OPERATOR" type="tns:TypeOperator"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="MAILING_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="REPORT_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="LINK_NAME" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="WHERE_OPERATOR" type="tns:WhereOperator"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="CRITERIA_OPERATOR" type="tns:CriteriaOperator"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="VALUES" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CriteriaElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TYPE" type="tns:CriteriaType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="EXPRESSION" type="tns:ExpressionElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExpressionElementType">
+  <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="AND_OR" type="tns:AndOr"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="TYPE" type="tns:ExpressionType"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="COLUMN_NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="OPERATORS" type="tns:Operators"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="RIGHT_PARENS" type="tns:RightParens"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="VALUES" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="LEFT_PARENS" type="tns:LeftParens"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PurgeTableRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_NAME" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="TABLE_VISIBILITY" type="tns:Visibility"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="DELETE_BEFORE" type="tns:DateTime3"/>     
+      <xs:element minOccurs="0" maxOccurs="1" name="EMAIL" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddListColumnRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="COLUMN_NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="COLUMN_TYPE" type="tns:ListColumnType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="DEFAULT" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SELECTION_VALUES" type="tns:SelectionValuesElementType"/>
+    </xs:sequence>
+  </xs:complexType> 
+  <xs:complexType name="CreateTableRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TABLE_NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="COLUMNS" type="tns:TableColumnsElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InsertUpdateRelationalTableRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TABLE_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="ROWS" type="tns:RowsElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeleteRelationalTableDataRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TABLE_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="ROWS" type="tns:DeleteRowsElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateContactListRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="DATABASE_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="CONTACT_LIST_NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="VISIBILITY" type="tns:Visibility"/>     
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddContactToContactListRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="CONTACT_LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="CONTACT_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="COLUMN" type="tns:ColumnNameValueElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddContactToProgramRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="PROGRAM_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="CONTACT_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImportList" type="tns:ImportListRequestType"/>
+  <xs:element name="ImportRecipientFieldData" type="tns:ImportRecipientFieldDataRequestType"/>
+  <xs:element name="ExportList" type="tns:ExportListRequestType"/>
+  <xs:element name="GetListMetaData" type="tns:GetListMetaDataRequestType"/>
+  <xs:element name="ListRecipientMailings" type="tns:ListRecipientMailingsRequestType"/>
+  <xs:element name="RemoveRecipient" type="tns:RemoveRecipientRequestType"/>
+  <xs:element name="GetLists" type="tns:GetListsRequestType"/>
+  <xs:element name="ImportTable" type="tns:ImportTableRequestType"/>
+  <xs:element name="JoinTable" type="tns:JoinTableRequestType"/>
+  <xs:element name="ExportTable" type="tns:ExportTableRequestType"/>
+  <xs:element name="DeleteTable" type="tns:DeleteTableRequestType"/>
+  <xs:element name="CreateQuery" type="tns:CreateQueryRequestType"/>
+  <xs:element name="CalculateQuery" type="tns:CalculateQueryRequestType"/>
+  <xs:element name="PurgeTable" type="tns:PurgeTableRequestType"/>  
+  <xs:element name="AddListColumn" type="tns:AddListColumnRequestType"/>  
+  <xs:element name="CreateTable" type="tns:CreateTableRequestType"/>  
+  <xs:element name="InsertUpdateRelationalTable" type="tns:InsertUpdateRelationalTableRequestType"/>
+  <xs:element name="DeleteRelationalTableData" type="tns:DeleteRelationalTableDataRequestType"/>
+  <xs:element name="CreateContactList" type="tns:CreateContactListRequestType"/>
+  <xs:element name="AddContactToContactList" type="tns:AddContactToContactListRequestType"/>
+  <xs:element name="AddContactToProgram" type="tns:AddContactToProgramRequestType"/>
+  <xs:element name="RESULT" type="tns:ListMgmtUserActionsResponseType"/>
+</xs:schema>

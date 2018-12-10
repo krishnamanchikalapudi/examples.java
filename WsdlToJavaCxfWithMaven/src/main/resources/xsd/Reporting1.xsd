@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<xs:schema xmlns:tns="SilverpopApi:EngageService.Reporting" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="SilverpopApi:EngageService.Reporting">
+   <xs:simpleType name="ReportingSuccess">
+    <xs:restriction base="xs:boolean">
+      <xs:pattern value="true"/>
+      <xs:pattern value="false"/>
+    </xs:restriction>
+  </xs:simpleType> 
+  <xs:simpleType name="FileEncoding">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UTF-8"/>
+      <xs:enumeration value="ISO-8859-1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EventExportFormat">
+    <xs:annotation>
+      <xs:documentation>Comma Separated(0),Pipe Separated(1),Tab Separated(2)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="0"/>
+      <xs:enumeration value="1"/>
+      <xs:enumeration value="2"/>
+    </xs:restriction>
+  </xs:simpleType>  
+  <xs:simpleType name="PrivateShared">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Private"/>
+      <xs:enumeration value="Shared"/>
+    </xs:restriction>
+  </xs:simpleType>  
+  <xs:simpleType name="JobStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WAITING"/>
+      <xs:enumeration value="RUNNING"/>
+      <xs:enumeration value="CANCELED"/>
+      <xs:enumeration value="ERROR"/>
+      <xs:enumeration value="COMPLETE"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MetricsExportFormat">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CSV"/>
+      <xs:enumeration value="TSV"/>
+      <xs:enumeration value="PIPE"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateTime3">
+    <xs:annotation>
+      <xs:documentation>mm/dd/yyyy hh:mm:ss</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/([0-9][0-9][0-9][0-9]) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateTime4">
+    <xs:annotation>
+      <xs:documentation>yyyy-mm-dd hh:mm:ss.s</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="|(([0-9][0-9][0-9][0-9])-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]).0)"/>
+    </xs:restriction>
+  </xs:simpleType>
+  			<xs:complexType name="FaultErrorType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="errorid" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="module" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="class" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="method" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FaultDetailType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="error" type="tns:FaultErrorType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FaultType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="Request" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="FaultCode" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="FaultString" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="detail" type="tns:FaultDetailType"/>
+				</xs:sequence>
+			</xs:complexType>
+  <xs:complexType name="TrackingMetricExportRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="MAILING_ID" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="REPORT_ID" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="EXPORT_FORMAT" type="tns:MetricsExportFormat"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="LIST_ID" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="EMAIL" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SEND_DATE_START" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SEND_DATE_END" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="MOVE_TO_FTP" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="ALL_AGGREGATE_METRICS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AGGREGATE_SUMMARY" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="ALL_METRICS_FORWARDS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AGGREGATE_CLICKS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AGGREGATE_CLICKSTREAMS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AGGREGATE_CONVERSIONS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AGGREGATE_ATTACHMENTS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AGGREGATE_MEDIA" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AGGREGATE_SUPPRESSIONS " type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="MAIL_TRACK_INTERVAL" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="TOP_DOMAINS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="EXCLUDE_IM_FROM_METRICS" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetReportIdByDateRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="MAILING_ID" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_START" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_END" type="tns:DateTime3"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetSentMailingsForUserRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_START" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_END" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="OPTIONALUSER" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PRIVATE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SHARED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SCHEDULED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENT" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENDING" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="OPTIN_CONFIRMATION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PROFILE_CONFIRMATION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AUTOMATED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_ACTIVE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_COMPLETED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_CANCELLED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_SCRAPE_TEMPLATE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_TAGS" type="xs:string"/>    
+      <xs:element maxOccurs="1" minOccurs="0" name="EXCLUDE_ZERO_SENT" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetSentMailingsForListRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_CHILDREN" type="xs:string"/>      
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_START" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_END" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PRIVATE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SHARED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SCHEDULED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENT" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENDING" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="OPTIN_CONFIRMATION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PROFILE_CONFIRMATION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AUTOMATED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_ACTIVE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_COMPLETED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_CANCELLED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_SCRAPE_TEMPLATE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_TAGS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="EXCLUDE_ZERO_SENT" type="xs:string"/>
+   </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ColumnsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="COLUMN" type="tns:ColumnElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ColumnElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="NAME" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RawRecipientDataExportRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="MAILING_ID" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="REPORT_ID" type="xs:long"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="MAILING" type="tns:MultiMailingsElementType"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_ID" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="LIST_ID" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_QUERIES" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="ALL_NON_EXPORTED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="EVENT_DATE_START" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="EVENT_DATE_END" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SEND_DATE_START" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SEND_DATE_END" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="EXPORT_FORMAT" type="tns:EventExportFormat"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="EXPORT_FILE_NAME" type="xs:string"/>     
+      <xs:element maxOccurs="1" minOccurs="0" name="FILE_ENCODING" type="tns:FileEncoding"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="EMAIL" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="MOVE_TO_FTP" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PRIVATE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SHARED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENT_MAILINGS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENDING" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="OPTIN_CONFIRMATION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PROFILE_CONFIRMATION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AUTOMATED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_ACTIVE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_COMPLETED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_CANCELLED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_SCRAPE_TEMPLATE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_TEST_MAILINGS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="ALL_EVENT_TYPES" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENT" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SUPPRESSED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="OPENS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CLICKS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="OPTINS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="OPTOUTS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="FORWARDS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="ATTACHMENTS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CONVERSIONS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CLICKSTREAMS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="HARD_BOUNCES" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SOFT_BOUNCES" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="REPLY_ABUSE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="REPLY_COA" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="REPLY_OTHER" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="MAIL_BLOCKS" type="xs:string"/>      
+      <xs:element maxOccurs="1" minOccurs="0" name="MAILING_RESTRICTIONS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SMS_ERROR" type="xs:string"/>      
+      <xs:element maxOccurs="1" minOccurs="0" name="SMS_REJECT" type="xs:string"/>   
+      <xs:element maxOccurs="1" minOccurs="0" name="SMS_OPTOUT" type="xs:string"/>   
+      <xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_SEEDS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_FORWARDS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_INBOX_MONITORING" type="xs:string"/>  
+      <xs:element maxOccurs="1" minOccurs="0" name="CODED_TYPE_FIELDS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="EXCLUDE_DELETED" type="xs:string"/>    
+      <xs:element maxOccurs="1" minOccurs="0" name="COLUMNS" type="tns:ColumnsElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetSentMailingsForOrgRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_START" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_END" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PRIVATE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SHARED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SCHEDULED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENT" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENDING" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="OPTIN_CONFIRMATION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PROFILE_CONFIRMATION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AUTOMATED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_ACTIVE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_COMPLETED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_CANCELLED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_SCRAPE_TEMPLATE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_TAGS" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="EXCLUDE_ZERO_SENT" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetAggregateTrackingForMailingRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="MAILING_ID" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="REPORT_ID" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="TOP_DOMAIN" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="INBOX_MONITORING" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PER_CLICK" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetAggregateTrackingForOrgRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_START" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_END" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="OPTIONALUSER" type="xs:string"/>      
+      <xs:element maxOccurs="1" minOccurs="0" name="PRIVATE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SHARED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SCHEDULED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENT" type="xs:string"/>      
+      <xs:element maxOccurs="1" minOccurs="0" name="SENDING" type="xs:string"/>   
+      <xs:element maxOccurs="1" minOccurs="0" name="OPTIN_CONFIRMATION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PROFILE_CONFIRMATION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AUTOMATED" type="xs:string"/>      
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_ACTIVE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_COMPLETED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_CANCELLED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="TOP_DOMAIN" type="xs:string"/>      
+      <xs:element maxOccurs="1" minOccurs="0" name="INBOX_MONITORING" type="xs:string"/>      
+      <xs:element maxOccurs="1" minOccurs="0" name="PER_CLICK" type="xs:string"/>      
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetAggregateTrackingForUserRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_START" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="1" name="DATE_END" type="tns:DateTime3"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="OPTIONALUSER" type="xs:string"/>      
+      <xs:element maxOccurs="1" minOccurs="0" name="PRIVATE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SHARED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SCHEDULED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENT" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="SENDING" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="OPTIN_CONFIRMATION" type="xs:string"/>      
+      <xs:element maxOccurs="1" minOccurs="0" name="PROFILE_CONFIRMATION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="AUTOMATED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_ACTIVE" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_COMPLETED" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CAMPAIGN_CANCELLED" type="xs:string"/>      
+      <xs:element maxOccurs="1" minOccurs="0" name="TOP_DOMAIN" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="INBOX_MONITORING" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PER_CLICK" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType> 
+  <xs:complexType name="WebTrackingDataExportRequestType">
+	<xs:sequence>
+		<xs:element maxOccurs="1" minOccurs="0" name="EVENT_DATE_START" type="tns:DateTime3"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="EVENT_DATE_END" type="tns:DateTime3"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="DOMAINS" type="tns:DomainsElementType"/>		
+		<xs:element maxOccurs="1" minOccurs="0" name="SITES" type="tns:SitesElementType"/>			
+		<xs:element maxOccurs="1" minOccurs="0" name="DATABASE_ID" type="xs:long"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="EXPORT_FORMAT" type="tns:EventExportFormat"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="EXPORT_FILE_NAME" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="FILE_ENCODING" type="tns:FileEncoding"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="EMAIL" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="MOVE_TO_FTP" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="ALL_EVENT_TYPES" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_SITE_VISIT_EVENTS" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_PAGE_VIEW_EVENTS" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_CLICK_EVENTS" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_FORM_SUBMIT_EVENTS" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_DOWNLOAD_EVENTS" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_MEDIA_EVENTS" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_SHARE_TO_SOCIAL_EVENTS" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="INCLUDE_CUSTOM_EVENTS" type="xs:string"/>
+		<xs:element maxOccurs="1" minOccurs="0" name="COLUMNS" type="tns:ColumnsElementType"/>
+	</xs:sequence>
+</xs:complexType>
+  <xs:complexType name="GetJobStatusRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="JOB_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeleteJobRequestType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="JOB_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TopDomainElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="MailingId" type="xs:long"/>
+      <xs:element minOccurs="1" name="ReportId" type="xs:long"/>
+      <xs:element minOccurs="1" name="Domain" type="xs:string"/>
+      <xs:element minOccurs="1" name="Sent" type="xs:int"/>
+      <xs:element minOccurs="1" name="Bounce" type="xs:int"/>
+      <xs:element minOccurs="1" name="Open" type="xs:int"/>
+      <xs:element minOccurs="1" name="Click" type="xs:int"/>
+      <xs:element minOccurs="1" name="Unsubscribe" type="xs:int"/>
+      <xs:element minOccurs="1" name="Conversion" type="xs:int"/>
+      <xs:element minOccurs="1" name="Conversion_Amount" type="xs:int"/>
+      <xs:element minOccurs="1" name="Reply_abuse" type="xs:int"/>
+      <xs:element minOccurs="1" name="Reply_mail_block" type="xs:int"/>
+      <xs:element minOccurs="1" name="Reply_mail_restriction" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InboxMonitoringElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="MailingId" type="xs:long"/>
+      <xs:element minOccurs="1" name="ReportId" type="xs:long"/>
+      <xs:element minOccurs="1" name="Domain" type="xs:string"/>
+      <xs:element minOccurs="1" name="Sent" type="xs:int"/>
+      <xs:element minOccurs="1" name="Inbox" type="xs:int"/>
+      <xs:element minOccurs="1" name="Bulk" type="xs:int"/>
+      <xs:element minOccurs="1" name="NotReceived" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ClicksElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="MailingId" type="xs:long"/>
+      <xs:element minOccurs="1" name="ReportId" type="xs:long"/>
+      <xs:element minOccurs="1" name="LinkName" type="xs:string"/>
+      <xs:element minOccurs="1" name="LinkURL" type="xs:string"/>
+      <xs:element minOccurs="1" name="TotalHTML" type="xs:int"/>
+      <xs:element minOccurs="1" name="TotalAOL" type="xs:int"/>
+      <xs:element minOccurs="1" name="TotalWEB" type="xs:int"/>
+      <xs:element minOccurs="1" name="TotalTEXT" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DomainsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="DOMAIN_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SitesElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="SITE_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MailingElementType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MailingId" type="xs:long"/>    
+      <xs:element minOccurs="0" name="ReportId" type="xs:long"/> 
+      <xs:element minOccurs="0" name="ScheduledTS" type="tns:DateTime4"/>
+      <xs:element minOccurs="0" name="MailingName" type="xs:string"/>
+      <xs:element minOccurs="0" name="ListName" type="xs:string"/>      
+      <xs:element minOccurs="0" name="ListId" type="xs:long"/>
+      <xs:element minOccurs="0" name="ParentListId" type="xs:long"/>
+      <xs:element minOccurs="0" name="UserName" type="xs:string"/>
+      <xs:element minOccurs="0" name="SentTS" type="tns:DateTime4"/>
+      <xs:element minOccurs="0" name="SentDateTime" type="tns:DateTime4"/>      
+      <xs:element minOccurs="0" name="NumSent" type="xs:int"/>      
+      <xs:element minOccurs="0" name="Subject" type="xs:string"/>      
+      <xs:element minOccurs="0" name="Visibility" type="tns:PrivateShared"/>
+      <xs:element minOccurs="0" name="QueryId" type="xs:long"/>
+      <xs:element minOccurs="0" name="QueryName" type="xs:string"/>
+      <xs:element minOccurs="0" name="ContactListId" type="xs:long"/>
+      <xs:element minOccurs="0" name="ContactListName" type="xs:string"/>   
+      <xs:element minOccurs="0" name="Tags" type="tns:TagsElementType"/>
+      <xs:element minOccurs="0" name="NumSeeds" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumSuppressed" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumInboxMonitored" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumBounceHard" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumBounceSoft" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueOpen" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossOpen" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueClick" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossClick" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueAttach" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossAttach" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueClickStreams" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossClickStreams" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueMedia" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossMedia" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossAbuse" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossChangeAddress" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossMailBlock" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossMailRestriction" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossOther" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumConversions" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumConversionAmount" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumBounceHardFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumBounceSoftFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumConversionAmountFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumAttachOpenFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumClickFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueForwardFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossForwardFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueConversionsFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossConversionsFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueClickstreamFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossClickstreamFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueClickFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossClickFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueAttachOpenFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossAttachOpenFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueMediaFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossMediaFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumUniqueOpenFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumGrossOpenFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumAbuseFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumChangeAddressFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumMailRestrictionFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumMailBlockFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumOtherFwd" type="xs:int"/>
+      <xs:element minOccurs="0" name="NumSuppressedFwd" type="xs:int"/>          
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TagsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Tag" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>  
+  <xs:complexType name="TrackingMetricMailingElementType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="JOB_ID" type="xs:long"/>
+      <xs:element minOccurs="0" name="MAILING_ID" type="xs:long"/>
+      <xs:element minOccurs="0" name="FILE_PATH" type="xs:string"/>
+      <xs:element minOccurs="0" name="SENT_DATE" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>  
+    <xs:complexType name="MultiMailingsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="MAILING_ID" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="REPORT_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ParametersElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="PARAMETER" type="tns:ParameterElementType"/>
+    </xs:sequence>
+  </xs:complexType>    
+  <xs:complexType name="ParameterElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="0" name="NAME" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="VALUE" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>    
+  <xs:complexType name="ReportingResponseType">
+    <xs:sequence>
+      <xs:element name="SUCCESS" type="tns:ReportingSuccess"/>
+      <xs:element minOccurs="0" name="Fault" type="tns:FaultType"/>
+      <xs:element minOccurs="0" name="MAILING" type="tns:TrackingMetricMailingElementType"/>  
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Mailing" type="tns:MailingElementType"/>
+      <xs:element minOccurs="0" name="JOB_ID" type="xs:long"/>
+      <xs:element minOccurs="0" name="FILE_PATH" type="xs:string"/>    
+      <xs:element minOccurs="0" name="JOB_STATUS" type="tns:JobStatus"/>
+      <xs:element minOccurs="0" name="JOB_DESCRIPTION" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="PARAMETERS" type="tns:ParametersElementType"/>
+      <xs:element minOccurs="0" name="TopDomains" type="tns:TopDomainsElementType"/>
+      <xs:element minOccurs="0" name="InboxMonitored" type="tns:InboxMonitoredElementType"/>  
+      <xs:element minOccurs="0" name="Clicks" type="tns:ClicksElementType"/>    
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TopDomainsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="TopDomain" type="tns:TopDomainElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InboxMonitoredElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="InboxMonitoring" type="tns:InboxMonitoringElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RESULT" type="tns:ReportingResponseType"/>
+  <xs:element name="TrackingMetricExport" type="tns:TrackingMetricExportRequestType"/>
+  <xs:element name="GetReportIdByDate" type="tns:GetReportIdByDateRequestType"/>
+  <xs:element name="GetSentMailingsForUser" type="tns:GetSentMailingsForUserRequestType"/>
+  <xs:element name="GetSentMailingsForList" type="tns:GetSentMailingsForListRequestType"/>
+  <xs:element name="RawRecipientDataExport" type="tns:RawRecipientDataExportRequestType"/>
+  <xs:element name="GetSentMailingsForOrg" type="tns:GetSentMailingsForOrgRequestType"/>
+  <xs:element name="GetAggregateTrackingForMailing" type="tns:GetAggregateTrackingForMailingRequestType"/>
+  <xs:element name="GetAggregateTrackingForOrg" type="tns:GetAggregateTrackingForOrgRequestType"/>
+  <xs:element name="GetAggregateTrackingForUser" type="tns:GetAggregateTrackingForUserRequestType"/>
+  <xs:element name="GetJobStatus" type="tns:GetJobStatusRequestType"/>
+  <xs:element name="DeleteJob" type="tns:DeleteJobRequestType"/>
+  <xs:element name="WebTrackingDataExport" type="tns:WebTrackingDataExportRequestType"/>
+</xs:schema>

@@ -1,0 +1,1104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="SilverpopApi:Engageservice" xmlns:tns1="SilverpopApi:EngageService.SessionMgmt.Login" xmlns:tns2="SilverpopApi:EngageService.SessionHeader" xmlns:tns3="SilverpopApi:EngageService.MailManagement" xmlns:tns4="SilverpopApi:EngageService.ListMgmt.RecipientActions" xmlns:tns5="SilverpopApi:EngageService.Reporting" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns6="SilverpopApi:EngageService.ListMgmt.UserActions" xmlns:tns="SilverpopApi:Engageservice" xmlns:tns7="SilverpopApi:EngageService.MailManagement.UserActions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="SilverpopApi:EngageService.SessionMgmt.Login" schemaLocation="xsd/SessionMgmt1.xsd"></xsd:import>
+      <xsd:import namespace="SilverpopApi:EngageService.SessionHeader" schemaLocation="xsd/SessionHeader1.xsd"></xsd:import>
+      <xsd:import namespace="SilverpopApi:EngageService.MailManagement" schemaLocation="xsd/MailMgmt2.xsd"></xsd:import>
+      <xsd:import namespace="SilverpopApi:EngageService.ListMgmt.RecipientActions" schemaLocation="xsd/ListMgmt2.xsd"></xsd:import>
+      <xsd:import namespace="SilverpopApi:EngageService.ListMgmt.UserActions" schemaLocation="xsd/ListMgmt-UserActions.xsd"></xsd:import>
+      <xsd:import namespace="SilverpopApi:EngageService.Reporting" schemaLocation="xsd/Reporting1.xsd"></xsd:import>
+      <xsd:import namespace="SilverpopApi:EngageService.MailManagement.UserActions" schemaLocation="xsd/MailMgmt-UserActions.xsd"></xsd:import>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SessionHeaderRequest">
+    <wsdl:part element="tns2:sessionHeader" name="sessionidheader"/>
+  </wsdl:message>
+  <wsdl:message name="LoginRequest">
+    <wsdl:part element="tns1:Login" name="LoginRequest"/>
+  </wsdl:message>
+  <wsdl:message name="LoginResponse">
+    <wsdl:part element="tns1:RESULT" name="LoginResponse"/>
+  </wsdl:message>
+  <wsdl:message name="LogoutRequest">
+    <wsdl:part element="tns1:Logout" name="LogoutRequest"/>
+  </wsdl:message>
+  <wsdl:message name="LogoutResponse">
+    <wsdl:part element="tns1:RESULT" name="LogoutResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ForwardToFriendRequest">
+    <wsdl:part element="tns3:ForwardToFriend" name="ForwardToFriendRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ForwardToFriendResponse">
+    <wsdl:part element="tns3:FTF_RESULT" name="ForwardToFriendResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SendMailingRequest">
+    <wsdl:part element="tns3:SendMailing" name="SendMailingRequest"/>
+  </wsdl:message>
+  <wsdl:message name="SendMailingResponse">
+    <wsdl:part element="tns3:RESULT" name="SendMailingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AddRecipientRequest">
+    <wsdl:part element="tns4:AddRecipient" name="AddRecipientRequest"/>
+  </wsdl:message>
+  <wsdl:message name="AddRecipientResponse">
+    <wsdl:part element="tns4:RESULT" name="AddRecipientResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DoubleOptInRequest">
+    <wsdl:part element="tns4:DoubleOptInRecipient" name="DoubleOptInRequest"/>
+  </wsdl:message>
+  <wsdl:message name="DoubleOptInResponse">
+    <wsdl:part element="tns4:RESULT" name="DoubleOptInResponse"/>
+  </wsdl:message>
+  <wsdl:message name="UpdateRecipientRequest">
+    <wsdl:part element="tns4:UpdateRecipient" name="UpdateRecipientRequest"/>
+  </wsdl:message>
+  <wsdl:message name="UpdateRecipientResponse">
+    <wsdl:part element="tns4:RESULT" name="UpdateRecipientResponse"/>
+  </wsdl:message>
+  <wsdl:message name="OptOutRecipientRequest">
+    <wsdl:part element="tns4:OptOutRecipient" name="OptOutRecipientRequest"/>
+  </wsdl:message>
+  <wsdl:message name="OptOutRecipientResponse">
+    <wsdl:part element="tns4:RESULT" name="OptOutRecipientResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SelectRecipientDataRequest">
+    <wsdl:part element="tns4:SelectRecipientData" name="SelectRecipientDataRequest"/>
+  </wsdl:message>
+  <wsdl:message name="SelectRecipientDataResponse">
+    <wsdl:part element="tns4:RESULT" name="SelectRecipientDataResponse"/>
+  </wsdl:message>
+  <wsdl:message name="TrackingMetricExportRequest">
+    <wsdl:part element="tns5:TrackingMetricExport" name="TrackingMetricExportRequest"/>
+  </wsdl:message>
+  <wsdl:message name="TrackingMetricExportResponse">
+    <wsdl:part element="tns5:RESULT" name="TrackingMetricExportResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetReportIdByDateRequest">
+    <wsdl:part element="tns5:GetReportIdByDate" name="GetReportIdByDateRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetReportIdByDateResponse">
+    <wsdl:part element="tns5:RESULT" name="GetReportIdByDateResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetSentMailingsForUserRequest">
+    <wsdl:part element="tns5:GetSentMailingsForUser" name="GetSentMailingsForUserRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetSentMailingsForUserResponse">
+    <wsdl:part element="tns5:RESULT" name="GetSentMailingsForUserResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetSentMailingsForListRequest">
+    <wsdl:part element="tns5:GetSentMailingsForList" name="GetSentMailingsForListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetSentMailingsForListResponse">
+    <wsdl:part element="tns5:RESULT" name="GetSentMailingsForListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="RawRecipientDataExportRequest">
+    <wsdl:part element="tns5:RawRecipientDataExport" name="RawRecipientDataExportRequest"/>
+  </wsdl:message>
+  <wsdl:message name="RawRecipientDataExportResponse">
+    <wsdl:part element="tns5:RESULT" name="RawRecipientDataExportResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetSentMailingsForOrgRequest">
+    <wsdl:part element="tns5:GetSentMailingsForOrg" name="GetSentMailingsForOrgRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetSentMailingsForOrgResponse">
+    <wsdl:part element="tns5:RESULT" name="GetSentMailingsForOrgResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAggregateTrackingForMailingRequest">
+    <wsdl:part element="tns5:GetAggregateTrackingForMailing" name="GetAggregateTrackingForMailingRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetAggregateTrackingForMailingResponse">
+    <wsdl:part element="tns5:RESULT" name="GetAggregateTrackingForMailingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAggregateTrackingForOrgRequest">
+    <wsdl:part element="tns5:GetAggregateTrackingForOrg" name="GetAggregateTrackingForOrgRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetAggregateTrackingForOrgResponse">
+    <wsdl:part element="tns5:RESULT" name="GetAggregateTrackingForOrgResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAggregateTrackingForUserRequest">
+    <wsdl:part element="tns5:GetAggregateTrackingForUser" name="GetAggregateTrackingForUserRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetAggregateTrackingForUserResponse">
+    <wsdl:part element="tns5:RESULT" name="GetAggregateTrackingForUserResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetJobStatusRequest">
+    <wsdl:part element="tns5:GetJobStatus" name="GetJobStatusRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetJobStatusResponse">
+    <wsdl:part element="tns5:RESULT" name="GetJobStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DeleteJobRequest">
+    <wsdl:part element="tns5:DeleteJob" name="DeleteJobRequest"/>
+  </wsdl:message>
+  <wsdl:message name="DeleteJobResponse">
+    <wsdl:part element="tns5:RESULT" name="DeleteJobResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CalculateQueryRequest">
+    <wsdl:part element="tns6:CalculateQuery" name="CalculateQueryRequest"/>
+  </wsdl:message>
+  <wsdl:message name="CalculateQueryResponse">
+    <wsdl:part element="tns6:RESULT" name="CalculateQueryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ImportListRequest">
+    <wsdl:part element="tns6:ImportList" name="ImportListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ImportListResponse">
+    <wsdl:part element="tns6:RESULT" name="ImportListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ImportRecipientFieldDataRequest">
+    <wsdl:part element="tns6:ImportRecipientFieldData" name="ImportRecipientFieldDataRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ImportRecipientFieldDataResponse">
+    <wsdl:part element="tns6:RESULT" name="ImportRecipientFieldDataResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ExportListRequest">
+    <wsdl:part element="tns6:ExportList" name="ExportListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ExportListResponse">
+    <wsdl:part element="tns6:RESULT" name="ExportListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetListMetaDataRequest">
+    <wsdl:part element="tns6:GetListMetaData" name="GetListMetaDataRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetListMetaDataResponse">
+    <wsdl:part element="tns6:RESULT" name="GetListMetaDataResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ListRecipientMailingsRequest">
+    <wsdl:part element="tns6:ListRecipientMailings" name="ListRecipientMailingsRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ListRecipientMailingsResponse">
+    <wsdl:part element="tns6:RESULT" name="ListRecipientMailingsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="RemoveRecipientRequest">
+    <wsdl:part element="tns6:RemoveRecipient" name="RemoveRecipientRequest"/>
+  </wsdl:message>
+  <wsdl:message name="RemoveRecipientResponse">
+    <wsdl:part element="tns6:RESULT" name="RemoveRecipientResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetListsRequest">
+    <wsdl:part element="tns6:GetLists" name="GetListsRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetListsResponse">
+    <wsdl:part element="tns6:RESULT" name="GetListsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ImportTableRequest">
+    <wsdl:part element="tns6:ImportTable" name="ImportTableRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ImportTableResponse">
+    <wsdl:part element="tns6:RESULT" name="ImportTableResponse"/>
+  </wsdl:message>
+  <wsdl:message name="JoinTableRequest">
+    <wsdl:part element="tns6:JoinTable" name="JoinTableRequest"/>
+  </wsdl:message>
+  <wsdl:message name="JoinTableResponse">
+    <wsdl:part element="tns6:RESULT" name="JoinTableResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ExportTableRequest">
+    <wsdl:part element="tns6:ExportTable" name="ExportTableRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ExportTableResponse">
+    <wsdl:part element="tns6:RESULT" name="ExportTableResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DeleteTableRequest">
+    <wsdl:part element="tns6:DeleteTable" name="DeleteTableRequest"/>
+  </wsdl:message>
+  <wsdl:message name="DeleteTableResponse">
+    <wsdl:part element="tns6:RESULT" name="DeleteTableResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CreateQueryRequest">
+    <wsdl:part element="tns6:CreateQuery" name="CreateQueryRequest"/>
+  </wsdl:message>
+  <wsdl:message name="CreateQueryResponse">
+    <wsdl:part element="tns6:RESULT" name="CreateQueryResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ScheduleMailingRequest">
+    <wsdl:part element="tns7:ScheduleMailing" name="ScheduleMailingRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ScheduleMailingResponse">
+    <wsdl:part element="tns7:RESULT" name="ScheduleMailingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AddDCRulesetRequest">
+    <wsdl:part element="tns7:AddDCRuleset" name="AddDCRulesetRequest"/>
+  </wsdl:message>
+  <wsdl:message name="AddDCRulesetResponse">
+    <wsdl:part element="tns7:RESULT" name="AddDCRulesetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ImportDCRulesetRequest">
+    <wsdl:part element="tns7:ImportDCRuleset" name="ImportDCRulesetRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ImportDCRulesetResponse">
+    <wsdl:part element="tns7:RESULT" name="ImportDCRulesetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ExportDCRulesetRequest">
+    <wsdl:part element="tns7:ExportDCRuleset" name="ExportDCRulesetRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ExportDCRulesetResponse">
+    <wsdl:part element="tns7:RESULT" name="ExportDCRulesetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ListDCRulesetsForMailingRequest">
+    <wsdl:part element="tns7:ListDCRulesetsForMailing" name="ListDCRulesetsForMailingRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ListDCRulesetsForMailingResponse">
+    <wsdl:part element="tns7:RESULT" name="ListDCRulesetsForMailingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetDCRulesetRequest">
+    <wsdl:part element="tns7:GetDCRuleset" name="GetDCRulesetRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetDCRulesetResponse">
+    <wsdl:part element="tns7:RESULT" name="GetDCRulesetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ReplaceDCRulesetRequest">
+    <wsdl:part element="tns7:ReplaceDCRuleset" name="ReplaceDCRulesetRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ReplaceDCRulesetResponse">
+    <wsdl:part element="tns7:RESULT" name="ReplaceDCRulesetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ValidateDCMailingRulesetRequest">
+    <wsdl:part element="tns7:ValidateDCRuleset" name="ValidateDCMailingRulesetRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ValidateDCMailingRulesetResponse">
+    <wsdl:part element="tns7:RESULT" name="ValidateDCMailingRulesetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DeleteDCRulesetRequest">
+    <wsdl:part element="tns7:DeleteDCRuleset" name="DeleteDCRulesetRequest"/>
+  </wsdl:message>
+  <wsdl:message name="DeleteDCRulesetResponse">
+    <wsdl:part element="tns7:RESULT" name="DeleteDCRulesetResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ExportMailingTemplateRequest">
+    <wsdl:part element="tns7:ExportMailingTemplate" name="ExportMailingTemplateRequest"/>
+  </wsdl:message>
+  <wsdl:message name="ExportMailingTemplateResponse">
+    <wsdl:part element="tns7:RESULT" name="ExportMailingTemplateResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetMailingTemplatesRequest">
+    <wsdl:part element="tns7:GetMailingTemplates" name="GetMailingTemplatesRequest"/>
+  </wsdl:message>
+  <wsdl:message name="GetMailingTemplatesResponse">
+    <wsdl:part element="tns7:RESULT" name="GetMailingTemplatesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="PurgeTableRequest">
+    <wsdl:part element="tns6:PurgeTable" name="PurgeTableRequest"/>
+  </wsdl:message>
+  <wsdl:message name="PurgeTableResponse">
+    <wsdl:part element="tns6:RESULT" name="PurgeTableResponse"/>
+  </wsdl:message>
+  <wsdl:message name="PreviewMailingRequest">
+    <wsdl:part element="tns7:PreviewMailing" name="PreviewMailingRequest"/>
+  </wsdl:message>
+  <wsdl:message name="PreviewMailingResponse">
+    <wsdl:part element="tns7:RESULT" name="PreviewMailingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AddListColumnRequest">
+    <wsdl:part element="tns6:AddListColumn" name="AddListColumnRequest"/>
+  </wsdl:message>
+  <wsdl:message name="AddListColumnResponse">
+    <wsdl:part element="tns6:RESULT" name="AddListColumnResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CreateTableRequest">
+    <wsdl:part element="tns6:CreateTable" name="CreateTableRequest"/>
+  </wsdl:message>
+  <wsdl:message name="CreateTableResponse">
+    <wsdl:part element="tns6:RESULT" name="CreateTableResponse"/>
+  </wsdl:message>
+  <wsdl:message name="InsertUpdateRelationalTableRequest">
+    <wsdl:part element="tns6:InsertUpdateRelationalTable" name="InsertUpdateRelationalTableRequest"/>
+  </wsdl:message>
+  <wsdl:message name="InsertUpdateRelationalTableResponse">
+    <wsdl:part element="tns6:RESULT" name="InsertUpdateRelationalTableResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DeleteRelationalTableDataRequest">
+    <wsdl:part element="tns6:DeleteRelationalTableData" name="DeleteRelationalTableDataRequest"/>
+  </wsdl:message>
+  <wsdl:message name="DeleteRelationalTableDataResponse">
+    <wsdl:part element="tns6:RESULT" name="DeleteRelationalTableDataResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CreateContactListRequest">
+    <wsdl:part element="tns6:CreateContactList" name="CreateContactListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="CreateContactListResponse">
+    <wsdl:part element="tns6:RESULT" name="CreateContactListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AddContactToContactListRequest">
+    <wsdl:part element="tns6:AddContactToContactList" name="AddContactToContactListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="AddContactToContactListResponse">
+    <wsdl:part element="tns6:RESULT" name="AddContactToContactListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="AddContactToProgramRequest">
+    <wsdl:part element="tns6:AddContactToProgram" name="AddContactToProgramRequest"/>
+  </wsdl:message>
+  <wsdl:message name="AddContactToProgramResponse">
+    <wsdl:part element="tns6:RESULT" name="AddContactToProgramResponse"/>
+  </wsdl:message>
+  <wsdl:message name="WebTrackingDataExportRequest">
+    <wsdl:part element="tns5:WebTrackingDataExport" name="WebTrackingDataExportRequest"/>
+  </wsdl:message>
+  <wsdl:message name="WebTrackingDataExportResponse">
+    <wsdl:part element="tns5:RESULT" name="WebTrackingDataExportResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="EngageSoapApiClientService_Interface">
+    <wsdl:operation name="Login">
+      <wsdl:input message="sil:LoginRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:LoginResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input message="sil:LogoutRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:LogoutResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ForwardToFriend">
+      <wsdl:input message="sil:ForwardToFriendRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ForwardToFriendResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="SendMailing">
+      <wsdl:input message="sil:SendMailingRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:SendMailingResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="AddRecipient">
+      <wsdl:input message="sil:AddRecipientRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:AddRecipientResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="DoubleOptIn">
+      <wsdl:input message="sil:DoubleOptInRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:DoubleOptInResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecipient">
+      <wsdl:input message="sil:UpdateRecipientRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:UpdateRecipientResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="OptOutRecipient">
+      <wsdl:input message="sil:OptOutRecipientRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:OptOutRecipientResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="SelectRecipientData">
+      <wsdl:input message="sil:SelectRecipientDataRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:SelectRecipientDataResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="TrackingMetricExport">
+      <wsdl:input message="sil:TrackingMetricExportRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:TrackingMetricExportResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportIdByDate">
+      <wsdl:input message="sil:GetReportIdByDateRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetReportIdByDateResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetSentMailingsForUser">
+      <wsdl:input message="sil:GetSentMailingsForUserRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetSentMailingsForUserResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetSentMailingsForList">
+      <wsdl:input message="sil:GetSentMailingsForListRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetSentMailingsForListResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="RawRecipientDataExport">
+      <wsdl:input message="sil:RawRecipientDataExportRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:RawRecipientDataExportResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetSentMailingsForOrg">
+      <wsdl:input message="sil:GetSentMailingsForOrgRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetSentMailingsForOrgResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAggregateTrackingForMailing">
+      <wsdl:input message="sil:GetAggregateTrackingForMailingRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetAggregateTrackingForMailingResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAggregateTrackingForOrg">
+      <wsdl:input message="sil:GetAggregateTrackingForOrgRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetAggregateTrackingForOrgResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAggregateTrackingForUser">
+      <wsdl:input message="sil:GetAggregateTrackingForUserRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetAggregateTrackingForUserResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetJobStatus">
+      <wsdl:input message="sil:GetJobStatusRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetJobStatusResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteJob">
+      <wsdl:input message="sil:DeleteJobRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:DeleteJobResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateQuery">
+      <wsdl:input message="sil:CalculateQueryRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:CalculateQueryResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ImportList">
+      <wsdl:input message="sil:ImportListRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ImportListResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ImportRecipientFieldData">
+      <wsdl:input message="sil:ImportRecipientFieldDataRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ImportRecipientFieldDataResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ExportList">
+      <wsdl:input message="sil:ExportListRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ExportListResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetListMetaData">
+      <wsdl:input message="sil:GetListMetaDataRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetListMetaDataResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ListRecipientMailings">
+      <wsdl:input message="sil:ListRecipientMailingsRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ListRecipientMailingsResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRecipient">
+      <wsdl:input message="sil:RemoveRecipientRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:RemoveRecipientResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetLists">
+      <wsdl:input message="sil:GetListsRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetListsResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ImportTable">
+      <wsdl:input message="sil:ImportTableRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ImportTableResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="JoinTable">
+      <wsdl:input message="sil:JoinTableRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:JoinTableResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ExportTable">
+      <wsdl:input message="sil:ExportTableRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ExportTableResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTable">
+      <wsdl:input message="sil:DeleteTableRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:DeleteTableResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuery">
+      <wsdl:input message="sil:CreateQueryRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:CreateQueryResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ScheduleMailing">
+      <wsdl:input message="sil:ScheduleMailingRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ScheduleMailingResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="AddDCRuleset">
+      <wsdl:input message="sil:AddDCRulesetRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:AddDCRulesetResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ImportDCRuleset">
+      <wsdl:input message="sil:ImportDCRulesetRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ImportDCRulesetResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ExportDCRuleset">
+      <wsdl:input message="sil:ExportDCRulesetRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ExportDCRulesetResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ListDCRulesetsForMailing">
+      <wsdl:input message="sil:ListDCRulesetsForMailingRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ListDCRulesetsForMailingResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetDCRuleset">
+      <wsdl:input message="sil:GetDCRulesetRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetDCRulesetResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ReplaceDCRuleset">
+      <wsdl:input message="sil:ReplaceDCRulesetRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ReplaceDCRulesetResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDCMailingRuleset">
+      <wsdl:input message="sil:ValidateDCMailingRulesetRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ValidateDCMailingRulesetResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDCRuleset">
+      <wsdl:input message="sil:DeleteDCRulesetRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:DeleteDCRulesetResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="ExportMailingTemplate">
+      <wsdl:input message="sil:ExportMailingTemplateRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:ExportMailingTemplateResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingTemplates">
+      <wsdl:input message="sil:GetMailingTemplatesRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:GetMailingTemplatesResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="PurgeTable">
+      <wsdl:input message="sil:PurgeTableRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:PurgeTableResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="PreviewMailing">
+      <wsdl:input message="sil:PreviewMailingRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:PreviewMailingResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="AddListColumn">
+      <wsdl:input message="sil:AddListColumnRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:AddListColumnResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTable">
+      <wsdl:input message="sil:CreateTableRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:CreateTableResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="InsertUpdateRelationalTable">
+      <wsdl:input message="sil:InsertUpdateRelationalTableRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:InsertUpdateRelationalTableResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRelationalTableData">
+      <wsdl:input message="sil:DeleteRelationalTableDataRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:DeleteRelationalTableDataResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="CreateContactList">
+      <wsdl:input message="sil:CreateContactListRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:CreateContactListResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="AddContactToContactList">
+      <wsdl:input message="sil:AddContactToContactListRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:AddContactToContactListResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="AddContactToProgram">
+      <wsdl:input message="sil:AddContactToProgramRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:AddContactToProgramResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+    <wsdl:operation name="WebTrackingDataExport">
+      <wsdl:input message="sil:WebTrackingDataExportRequest" xmlns:sil="SilverpopApi:Engageservice"/>
+      <wsdl:output message="sil:WebTrackingDataExportResponse" xmlns:sil="SilverpopApi:Engageservice"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SilverPop_Engage_SoapApi_client_Binding" type="sil:EngageSoapApiClientService_Interface" xmlns:sil="SilverpopApi:Engageservice">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="SilverpopApi:Engageservice.Login" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="SilverpopApi:Engageservice.Logout" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ForwardToFriend">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ForwardToFriend" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMailing">
+      <soap:operation soapAction="SilverpopApi:Engageservice.SendMailing" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRecipient">
+      <soap:operation soapAction="SilverpopApi:Engageservice.AddRecipient" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoubleOptIn">
+      <soap:operation soapAction="SilverpopApi:Engageservice.DoubleOptIn" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRecipient">
+      <soap:operation soapAction="SilverpopApi:Engageservice.UpdateRecipient" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OptOutRecipient">
+      <soap:operation soapAction="SilverpopApi:Engageservice.OptOutRecipient" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectRecipientData">
+      <soap:operation soapAction="SilverpopApi:Engageservice.SelectRecipientData" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TrackingMetricExport">
+      <soap:operation soapAction="SilverpopApi:Engageservice.TrackingMetricExport" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReportIdByDate">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetReportIdByDate" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSentMailingsForUser">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetSentMailingsForUser" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSentMailingsForList">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetSentMailingsForList" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RawRecipientDataExport">
+      <soap:operation soapAction="SilverpopApi:Engageservice.RawRecipientDataExport" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSentMailingsForOrg">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetSentMailingsForOrg" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAggregateTrackingForMailing">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetAggregateTrackingForMailing" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAggregateTrackingForOrg">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetAggregateTrackingForOrg" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAggregateTrackingForUser">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetAggregateTrackingForUser" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJobStatus">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetJobStatus" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteJob">
+      <soap:operation soapAction="SilverpopApi:Engageservice.DeleteJob" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CalculateQuery">
+      <soap:operation soapAction="SilverpopApi:Engageservice.CalculateQuery" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportList">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ImportList" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportRecipientFieldData">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ImportRecipientFieldData" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportList">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ExportList" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListMetaData">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetListMetaData" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListRecipientMailings">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ListRecipientMailings" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRecipient">
+      <soap:operation soapAction="SilverpopApi:Engageservice.RemoveRecipient" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLists">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetLists" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportTable">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ImportTable" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JoinTable">
+      <soap:operation soapAction="SilverpopApi:Engageservice.JoinTable" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportTable">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ExportTable" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTable">
+      <soap:operation soapAction="SilverpopApi:Engageservice.DeleteTable" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateQuery">
+      <soap:operation soapAction="SilverpopApi:Engageservice.CreateQuery" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScheduleMailing">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ScheduleMailing" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDCRuleset">
+      <soap:operation soapAction="SilverpopApi:Engageservice.AddDCRuleset" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportDCRuleset">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ImportDCRuleset" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportDCRuleset">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ExportDCRuleset" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListDCRulesetsForMailing">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ListDCRulesetsForMailing" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDCRuleset">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetDCRuleset" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReplaceDCRuleset">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ReplaceDCRuleset" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateDCMailingRuleset">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ValidateDCMailingRuleset" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDCRuleset">
+      <soap:operation soapAction="SilverpopApi:Engageservice.DeleteDCRuleset" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportMailingTemplate">
+      <soap:operation soapAction="SilverpopApi:Engageservice.ExportMailingTemplate" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMailingTemplates">
+      <soap:operation soapAction="SilverpopApi:Engageservice.GetMailingTemplates" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PurgeTable">
+      <soap:operation soapAction="SilverpopApi:Engageservice.PurgeTable" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PreviewMailing">
+      <soap:operation soapAction="SilverpopApi:Engageservice.PreviewMailing" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddListColumn">
+      <soap:operation soapAction="SilverpopApi:Engageservice.AddListColumn" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTable">
+      <soap:operation soapAction="SilverpopApi:Engageservice.CreateTable" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertUpdateRelationalTable">
+      <soap:operation soapAction="SilverpopApi:Engageservice.InsertUpdateRelationalTable" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRelationalTableData">
+      <soap:operation soapAction="SilverpopApi:Engageservice.DeleteRelationalTableData" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateContactList">
+      <soap:operation soapAction="SilverpopApi:Engageservice.CreateContactList" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddContactToContactList">
+      <soap:operation soapAction="SilverpopApi:Engageservice.AddContactToContactList" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddContactToProgram">
+      <soap:operation soapAction="SilverpopApi:Engageservice.AddContactToProgram" style="document"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WebTrackingDataExport">
+      <soap:operation soapAction="SilverpopApi:Engageservice.WebTrackingDataExport"/>
+      <wsdl:input>
+        <soap:header message="tns:SessionHeaderRequest" part="sessionidheader" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EngageSoapApiClientService">
+    <wsdl:port name="EngageSoapApiClientService" binding="sil:SilverPop_Engage_SoapApi_client_Binding" xmlns:sil="SilverpopApi:Engageservice">
+      <soap:address location="http://api3.ibmmarketingcloud.com/SoapApi"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

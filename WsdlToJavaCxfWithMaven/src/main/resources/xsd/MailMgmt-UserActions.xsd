@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<xs:schema xmlns:tns="SilverpopApi:EngageService.MailManagement.UserActions" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="SilverpopApi:EngageService.MailManagement.UserActions">
+   <xs:simpleType name="MailMgmtUserSuccess">
+    <xs:restriction base="xs:boolean">
+      <xs:pattern value="true" />
+      <xs:pattern value="false" />
+    </xs:restriction>
+  </xs:simpleType> 
+  <xs:simpleType name="Visibility">
+    <xs:annotation>
+      <xs:documentation>Private(0),Shared(1)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:enumeration value="0" />
+      <xs:enumeration value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TemplateVisibility">
+    <xs:annotation>
+      <xs:documentation>Private(0),Shared(1)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Shared" />
+      <xs:enumeration value="Private" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ExpressionType">
+    <xs:annotation>
+      <xs:documentation>Text(TE),Numeric(NE),Date(DE)</xs:documentation>
+    </xs:annotation>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="TE"/>
+		<xs:enumeration value="NE"/>
+		<xs:enumeration value="DE"/>
+	  </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Operators">
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="!="/>
+		<xs:enumeration value="&lt;="/>
+		<xs:enumeration value="&gt;="/>
+		<xs:enumeration value="&lt;"/>
+		<xs:enumeration value="&gt;"/>
+		<xs:enumeration value="="/>
+		<xs:enumeration value="IS NOT null"/>
+		<xs:enumeration value="IS null"/>
+		<xs:enumeration value="LIKE"/>
+		<xs:enumeration value="NOT like"/>
+		<xs:enumeration value="IN"/>
+		<xs:enumeration value="NOT in"/>
+		<xs:enumeration value="BETWEEN"/>
+	</xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LeftParens">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([(])*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RightParens">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([)])*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AndOr">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AND" />
+      <xs:enumeration value="OR" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ContentAreaType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Body-HTML" />
+      <xs:enumeration value="Body-Text" />
+      <xs:enumeration value="Body-AOL" />
+      <xs:enumeration value="Subject" />
+      <xs:enumeration value="From" />
+      <xs:enumeration value="From-Name" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateTime2">
+    <xs:annotation>
+      <xs:documentation>mm/dd/yy hh:mm AM</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/([0-9][0-9]) (0[1-9]|1[0-2]):([0-5][0-9]) ([A|P]M)"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateTime3">
+    <xs:annotation>
+      <xs:documentation>mm/dd/yyyy hh:mm:ss</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/([0-9][0-9][0-9][0-9]) (0[0-9]|1[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])"/>
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="SendTimeOptimization">
+    <xs:annotation>
+      <xs:documentation>Do Not Use STO(NONE),24 Hour Period(SEND_24HRS),7 Day Period(SEND_WEEK)</xs:documentation>
+    </xs:annotation>
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="NONE"/>
+		<xs:enumeration value="SEND_24HRS"/>
+		<xs:enumeration value="SEND_WEEK"/>
+	  </xs:restriction>
+  </xs:simpleType>
+  			<xs:complexType name="FaultErrorType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="errorid" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="module" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="class" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="method" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FaultDetailType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="error" type="tns:FaultErrorType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FaultType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="Request" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="FaultCode" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="FaultString" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="detail" type="tns:FaultDetailType"/>
+				</xs:sequence>
+			</xs:complexType>
+  <xs:complexType name="ScheduleMailingRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TEMPLATE_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="MAILING_NAME" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SEND_HTML" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SEND_AOL" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SEND_TEXT" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SUBJECT" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="FROM_NAME" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="FROM_ADDRESS" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="REPLY_TO" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="VISIBILITY" type="tns:Visibility"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="SCHEDULED" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="INBOX_MONITOR" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SEND_TIME_OPTIMIZATION" type="tns:SendTimeOptimization"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="WA_MAILINGLEVEL_CODE" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SUPPRESSION_LISTS" type="tns:SuppressionListsElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SUBSTITUTIONS" type="tns:SubstitutionsElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PreviewMailingRequestType">
+    <xs:sequence maxOccurs="1" minOccurs="1">
+      <xs:element maxOccurs="1" minOccurs="1" name="MailingId" type="xs:long"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="RecipientEmail" type="xs:string"/>
+      <xs:element maxOccurs="1" minOccurs="0" name="CRM_SYNC_ID" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MailMgmtUserActionsResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SUCCESS" type="tns:MailMgmtUserSuccess"/>
+      <xs:element minOccurs="0" name="Fault" type="tns:FaultType"/>
+      <xs:element minOccurs="0" name="MAILING_ID" type="xs:long"/>
+      <xs:element minOccurs="0" name="RULESET_ID" type="xs:long"/>
+      <xs:element minOccurs="0" name="JOB_ID" type="xs:long"/>
+      <xs:element minOccurs="0" name="FILE_NAME" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RULESET" type="tns:RulesetElementType"/>
+      <xs:element minOccurs="0" name="FILE_PATH" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="MAILING_TEMPLATE" type="tns:MailingTemplateElementType"/>
+      <xs:element minOccurs="0" name="HTMLBody" type="xs:string"/>
+      <xs:element minOccurs="0" name="AOLBody" type="xs:string"/>
+      <xs:element minOccurs="0" name="TextBody" type="xs:string"/>
+      <xs:element minOccurs="0" name="SpamScore" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SuppressionListsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="SUPPRESSION_LIST_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SubstitutionsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="1" name="SUBSTITUTION" type="tns:SubstitutionElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SubstitutionElementType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NAME" type="xs:string"/>
+      <xs:element minOccurs="0" name="VALUE" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddDCRulesetRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="RULESET_NAME" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="MAILING_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="CONTENT_AREAS" type="tns:ContentAreasElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="RULES" type="tns:RulesElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContentAreasElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="CONTENT_AREA" type="tns:ContentAreaElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContentAreaElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="DEFAULT_CONTENT" type="tns:DefaultContentElementType"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="tns:ContentAreaType" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="DefaultContentElementType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="RulesElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RULE" type="tns:RuleElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RuleElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="RULE_NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="PRIORITY" type="xs:int"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="CRITERIA" type="tns:CriteriaElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="CONTENTS" type="tns:ContentsElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CriteriaElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="EXPRESSION" type="tns:ExpressionElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExpressionElementType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="AND_OR" type="tns:AndOr"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="LEFT_PARENS" type="tns:LeftParens"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="TYPE" type="tns:ExpressionType"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="COLUMN_NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="OPERATORS" type="tns:Operators"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="VALUES" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="RIGHT_PARENS" type="tns:RightParens"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContentsElementType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="CONTENT" type="tns:ContentElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ContentElementType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="content_area" type="xs:string" use="optional"/>
+        <xs:attribute name="name" type="xs:string" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ImportDCRulesetRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="FILE_NAME" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="MAILING_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="RULESET_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExportDCRulesetRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="RULESET_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="MOVE_TO_FTP" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListDCRulesetsForMailingRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="MAILING_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RulesetElementType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RULESET_ID" type="xs:long"/>
+      <xs:element minOccurs="0" name="LIST_ID" type="xs:long"/>
+      <xs:element minOccurs="0" name="RULESET_NAME" type="xs:string"/>
+      <xs:element minOccurs="1" name="CONTENT_AREAS" type="tns:ContentAreasElementType"/>
+      <xs:element minOccurs="0" name="RULES" type="tns:RulesElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetDCRulesetRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="RULESET_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReplaceDCRulesetRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="RULESET_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="CONTENT_AREAS" type="tns:ContentAreasElementType"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="RULES" type="tns:RulesElementType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ValidateDCMailingRulesetType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="MAILING_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeleteDCRulesetRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="RULESET_ID" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExportMailingTemplateRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="TEMPLATE_ID" type="xs:long"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="ADD_TO_STORED_FILES" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetMailingTemplatesRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="VISIBILITY" type="tns:Visibility"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="LAST_MODIFIED_START_DATE" type="tns:DateTime3"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="LAST_MODIFIED_END_DATE" type="tns:DateTime3"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MailingTemplateElementType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="MAILING_ID" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="MAILING_NAME" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="SUBJECT" type="xs:string"/>      
+      <xs:element minOccurs="1" maxOccurs="1" name="LAST_MODIFIED" type="tns:DateTime2"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="VISIBILITY" type="tns:TemplateVisibility"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="USER_ID" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="FLAGGED_FOR_BACKUP" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="ALLOW_CRM_BLOCK" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ScheduleMailing" type="tns:ScheduleMailingRequestType"/>
+  <xs:element name="AddDCRuleset" type="tns:AddDCRulesetRequestType"/>
+  <xs:element name="ImportDCRuleset" type="tns:ImportDCRulesetRequestType"/>
+  <xs:element name="ExportDCRuleset" type="tns:ExportDCRulesetRequestType"/>
+  <xs:element name="ListDCRulesetsForMailing" type="tns:ListDCRulesetsForMailingRequestType"/>
+  <xs:element name="GetDCRuleset" type="tns:GetDCRulesetRequestType"/>
+  <xs:element name="ReplaceDCRuleset" type="tns:ReplaceDCRulesetRequestType"/>
+  <xs:element name="ValidateDCRuleset" type="tns:ValidateDCMailingRulesetType"/>
+  <xs:element name="DeleteDCRuleset" type="tns:DeleteDCRulesetRequestType"/>
+  <xs:element name="ExportMailingTemplate" type="tns:ExportMailingTemplateRequestType"/>
+  <xs:element name="GetMailingTemplates" type="tns:GetMailingTemplatesRequestType"/>
+  <xs:element name="PreviewMailing" type="tns:PreviewMailingRequestType"/>
+  <xs:element name="RESULT" type="tns:MailMgmtUserActionsResponseType"/>
+</xs:schema>

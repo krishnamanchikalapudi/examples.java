@@ -1,16 +1,11 @@
-group = 'com.example.aws'
-version = '0.0.1-SNAPSHOT'
-
 buildscript {
-	ext {
-		springVersion = '2.0.3.RELEASE'
-	}
     repositories {
         mavenCentral()
         maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
-         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springVersion}")
+         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.4.RELEASE")
+         classpath("com.palantir.gradle.docker:gradle-docker:0.20.1")
     }
 }
 
@@ -18,51 +13,51 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.palantir.docker'
 apply plugin: 'war'
 
-bootRun {
-	jvmArgs = ["-XX:MaxPermSize=256m", "-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
-}
+
+group = 'com.example.aws'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    maven { url 'http://repo.spring.io/libs-release' }
+    maven { url 'http://repo.spring.io/plugins-release' }
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+configurations {
+	providedRuntime
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
-/*
-bootJar {
-	manifest {
-		attributes 'Start-Class': 'com.example.config.Application'
-	}
-    mainClassName 'com.example.config.Application'
-
-    baseName 'springrestboot'
-	version '0.1.0'
-	archiveName 'springrestboot.jar'
-}
-*/
 
 bootWar {
 	excludeDevtools = false
 	manifest {
-		attributes 'Start-Class': 'com.example.config.Application'
+		attributes 'Start-Class': 'com.example.config.SpringRestBootDockerApplication'
 	}
-    mainClassName = 'com.example.config.Application'
-    baseName 'springrestboot'
-	  version '0.1.0'
-    archiveName 'springrestboot.war'
+    mainClassName = 'com.example.config.SpringRestBootDockerApplication'
+    baseName 'springrestbootdocker'
+	version '1.0.0'
+    archiveName 'springrestbootdocker.war'
 }
+
 bootRun {
-    main = 'com.example.config.Application'
+	jvmArgs = ["-XX:MaxPermSize=256m", "-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
+    main = 'com.example.config.SpringRestBootDockerApplication'
     systemProperties = System.properties
+}
+
+docker {
+	dependsOn build
+	name "${project.group}/${bootWar.baseName}"
+	files bootWar.archivePath
+	buildArgs(['JAR_FILE':"${bootWar.archivePath}"])
 }
 
 sourceSets {

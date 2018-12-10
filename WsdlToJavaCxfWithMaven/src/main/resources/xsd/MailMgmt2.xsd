@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<xs:schema xmlns:tns="SilverpopApi:EngageService.MailManagement" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="SilverpopApi:EngageService.MailManagement">
+   <xs:simpleType name="MailMgmtSuccess">
+    <xs:restriction base="xs:boolean">
+      <xs:pattern value="true" />
+      <xs:pattern value="false" />
+    </xs:restriction>
+  </xs:simpleType> 
+  			<xs:complexType name="FaultErrorType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="errorid" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="module" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="class" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="method" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FaultDetailType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="error" type="tns:FaultErrorType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FaultType">
+				<xs:sequence maxOccurs="1" minOccurs="0">
+					<xs:element maxOccurs="1" minOccurs="0" name="Request" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="FaultCode" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="FaultString" type="xs:string"/>
+					<xs:element maxOccurs="1" minOccurs="0" name="detail" type="tns:FaultDetailType"/>
+				</xs:sequence>
+			</xs:complexType>
+  <xs:complexType name="SendMailingRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="MailingId" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="RecipientEmail" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SendMailingResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SUCCESS" type="tns:MailMgmtSuccess"/>
+      <xs:element minOccurs="0" name="Fault" type="tns:FaultType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ForwardToFriendRequestType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="SENDER_EMAIL" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="rs" type="xs:string"/>
+      <xs:element minOccurs="0" maxOccurs="1" name="r" type="xs:long"/>      
+      <xs:element minOccurs="1" maxOccurs="1" name="m" type="xs:long"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="RECIPIENTS" type="xs:string"/>
+      <xs:element minOccurs="1" maxOccurs="1" name="MESSAGE" type="xs:string"/>
+    </xs:sequence>
+   </xs:complexType>
+  <xs:complexType name="ForwardToFriendResponseType"/>
+  <xs:element name="SendMailing" type="tns:SendMailingRequestType"/>
+  <xs:element name="RESULT" type="tns:SendMailingResponseType"/>
+  <xs:element name="ForwardToFriend" type="tns:ForwardToFriendRequestType"/>
+  <xs:element name="FTF_RESULT" type="tns:ForwardToFriendResponseType"/>
+</xs:schema>
