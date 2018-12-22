@@ -7,4 +7,6 @@ public final class Constants {
 
 	public static final String URL_HOME = "/v1/";
 	public static final String URL_BY_ID = (URL_HOME + "/{id}");
+
+	public static final String VAULT_SECRET = "secret/springrestbootvault";
 }

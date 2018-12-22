@@ -4,11 +4,13 @@ server:
      
 spring.application.name: springrestvault
 spring.cloud.vault:
-    host: localhost
+    scheme: http
+    host: 127.0.0.1
     port: 8200
-    scheme: https
     authentication: TOKEN
     token: s.4JjDMusvhOWjuE3jtTn90oAG
+    kv:
+      enabled: true
  
 logging:
   level:

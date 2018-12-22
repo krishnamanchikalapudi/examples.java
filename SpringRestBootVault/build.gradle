@@ -3,7 +3,7 @@ version = '0.0.1-SNAPSHOT'
 
 buildscript {
 	ext {
-		springVersion = '2.0.5.RELEASE'
+		springVersion = '2.1.0.RELEASE'
 	}
     repositories {
         mavenCentral()
@@ -28,23 +28,17 @@ repositories {
     mavenCentral()
     maven { url 'http://repo.spring.io/libs-release' }
 }
-ext {
-    springCloudVersion = 'Finchley.SR2'
-}
+
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
-	compile('org.springframework.cloud:spring-cloud-starter-vault-config')
+	compile('org.springframework.vault:spring-vault-core')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
-}
+
 /*
 bootJar {
 	manifest {
