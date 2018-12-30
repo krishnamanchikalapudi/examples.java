@@ -13,7 +13,7 @@
 ```
 - Response: body
 ```
-Welcome to Spring Rest + Boot example
+Welcome to Spring Rest + Boot + Vault example
 ```
 
 ### GET url: http://localhost:8080/v1/123

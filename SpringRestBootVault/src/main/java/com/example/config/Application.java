@@ -1,37 +1,39 @@
 package com.example.config;
 
-import com.example.config.SecretVaultConfig;
-
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan("com.example")
-@EnableConfigurationProperties(SecretVaultConfig.class)
-public class Application extends SpringBootServletInitializer {
+@EnableConfigurationProperties(VaultConfig.class)
+public class Application implements CommandLineRunner {
+	// public class Application extends SpringBootServletInitializer {
 
-	private final SecretVaultConfig config;
-	
-	public Application(SecretVaultConfig configuration) {
-		this.config = configuration;
+	private final VaultConfig vaultConfig;
 
-		System.out.println("username: "+ config.getUsername() );
-		System.out.println("password: " + config.getPassword());
+	public Application(VaultConfig vaultConfig) {
+		this.vaultConfig = vaultConfig;
+	}
+
+	/*
+	 * @Override protected SpringApplicationBuilder
+	 * configure(SpringApplicationBuilder application) { return
+	 * application.sources(Application.class); }
+	 */
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
 	}
 
 	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(Application.class);
+	public void run(String... args) {
+		System.out.println("----------------------------------------");
+		System.out.println("Configuration properties");
+		System.out.println("        db.username : " + vaultConfig.getUserName());
+		System.out.println("        db.password : " + vaultConfig.getPassword());
+		System.out.println("----------------------------------------");
 	}
-
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-
-
-	}
-
 }

@@ -2,16 +2,19 @@ server:
    servlet:
     context-path: /
      
-spring.application.name: springrestvault
-spring.cloud.vault:
+spring:
+  application.name: springrestbootvault
+  cloud.vault:
     scheme: http
     host: 127.0.0.1
     port: 8200
-    authentication: TOKEN
-    token: s.4JjDMusvhOWjuE3jtTn90oAG
+    authentication: token
+    token: s.1h17gwH41iRHcUyntmeP7MU3
     kv:
       enabled: true
- 
+      default-context: secret
+      application-name: springrestbootvault
+
 logging:
   level:
     root: INFO

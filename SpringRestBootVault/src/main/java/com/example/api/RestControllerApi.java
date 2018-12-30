@@ -2,6 +2,7 @@ package com.example.api;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,19 +20,15 @@ import com.example.constant.Constants;
 import com.example.model.Person;
 
 @RestController
-
 public class RestControllerApi {
-
 
 	@RequestMapping(Constants.URL_HOME)
 	public String home() {
-		;
-
-		return "Welcome to Spring Rest + Boot example";
+		return "Welcome to Spring Rest + Boot + Vault example";
 	}
 
 	@RequestMapping(value = { Constants.URL_BY_ID }, method = RequestMethod.GET, consumes = {
-			MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public @ResponseBody ResponseEntity<Person> jsonId(@PathVariable String id, @RequestHeader HttpHeaders reqHeaders) {
 		System.out.println("content-type: " + MediaType.APPLICATION_JSON_VALUE);
 		

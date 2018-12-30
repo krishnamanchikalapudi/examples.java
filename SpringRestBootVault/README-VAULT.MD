@@ -19,7 +19,7 @@ vault status
 
 5. Writing a Secret
 `````
-vault kv put secret/springrestbootvault username=HelloName password=HelloPassword
+vault kv put secret/springrestbootvault db.host=krisdb.example.com db.username=HelloName db.password=HelloPassword
 `````
 
 6. Getting a Secret

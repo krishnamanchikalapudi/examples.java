@@ -4,9 +4,9 @@
 
 # Steps
 - [Setup & config Vault](./README-VAULT.MD)
+- Copy & paste vault token to src/main/resources/bootstrap.yml
 - [Gradle build instructions](./README-GRADLE.MD)
 - [API test instructions](./README-REST.MD)
 
 # Dev guidelines
 - Execute spring boot service on local machine.
-- Deploy to AWS. Refer instructions at https://aws.amazon.com/blogs/devops/deploying-a-spring-boot-application-on-aws-using-aws-elastic-beanstalk/

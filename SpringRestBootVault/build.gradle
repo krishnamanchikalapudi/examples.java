@@ -1,21 +1,22 @@
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
+ext {
+	springVersion = '2.1.1.RELEASE'
+    springCloudVersion = 'Finchley.SR2'
+	springCloudVaultVersion = '2.0.2.RELEASE'
+}
+
 buildscript {
-	ext {
-		springVersion = '2.1.0.RELEASE'
-	}
     repositories {
         mavenCentral()
-        maven { url 'http://repo.spring.io/plugins-release' }
     }
-    dependencies {
-         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springVersion}")
+	dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE")
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'war'
@@ -32,11 +33,19 @@ repositories {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-vault-dependencies:${springCloudVaultVersion}"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
 dependencies {
-	compile('org.springframework.vault:spring-vault-core')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile ("org.springframework.boot:spring-boot-starter-web") 
+	compile ("org.springframework.boot:spring-boot-starter-actuator")
+	compile ("org.springframework.cloud:spring-cloud-starter-vault-config")
+	providedRuntime ("org.springframework.boot:spring-boot-starter-tomcat")
+	testCompile ("org.springframework.boot:spring-boot-starter-test")
 }
 
 /*
@@ -46,9 +55,9 @@ bootJar {
 	}
     mainClassName 'com.example.config.Application'
 
-    baseName 'springrestvault'
+    baseName 'springrestbootvault'
 	version '0.1.0'
-	archiveName 'springrestvault.jar'
+	archiveName 'springrestbootvault.jar'
 }
 */
 
@@ -58,9 +67,9 @@ bootWar {
 		attributes 'Start-Class': 'com.example.config.Application'
 	}
     mainClassName = 'com.example.config.Application'
-    baseName 'springrestvault'
+    baseName 'springrestbootvault'
 	  version '0.1.0'
-    archiveName 'springrestvault.war'
+    archiveName 'springrestbootvault.war'
 }
 bootRun {
     main = 'com.example.config.Application'
