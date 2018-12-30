@@ -23,7 +23,8 @@ vault status
 vault kv put secret/springrestbootvault db.url=jdbc:mysql://localhost:3306/springbootdb db.username=HelloName db.password=HelloPassword
 `````
 
-6. Getting a Secret
+
+6. Reading a Secret
 `````
 vault kv get secret/springrestbootvault
 `````
