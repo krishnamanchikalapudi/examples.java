@@ -18,9 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.constant.Constants;
 import com.example.model.Person;
+import com.example.service.VaultConfig;
 
 @RestController
 public class RestControllerApi {
+
+	@Autowired
+	private VaultConfig vaultConfig;
 
 	@RequestMapping(Constants.URL_HOME)
 	public String home() {
@@ -31,8 +35,6 @@ public class RestControllerApi {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public @ResponseBody ResponseEntity<Person> jsonId(@PathVariable String id, @RequestHeader HttpHeaders reqHeaders) {
 		System.out.println("content-type: " + MediaType.APPLICATION_JSON_VALUE);
-		
-
 		return id(id, reqHeaders);
 	}
 
@@ -40,7 +42,8 @@ public class RestControllerApi {
 		MultiValueMap<String, String> responseHeaders = new LinkedMultiValueMap<String, String>();
 		responseHeaders.set("status", "" + HttpStatus.OK.value());
 		responseHeaders.set("CurrentTime", (new Date().toString()));
-
+		System.out.println("Vault info:: " + vaultConfig.toString());
+		
 		Person p = new Person(id, "Krishna");
 		return new ResponseEntity<Person>(p, responseHeaders, HttpStatus.OK);
 	}

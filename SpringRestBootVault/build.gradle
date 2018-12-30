@@ -43,6 +43,7 @@ dependencyManagement {
 dependencies {
 	compile ("org.springframework.boot:spring-boot-starter-web") 
 	compile ("org.springframework.boot:spring-boot-starter-actuator")
+	compile("org.springframework.boot:spring-boot-configuration-processor")
 	compile ("org.springframework.cloud:spring-cloud-starter-vault-config")
 	providedRuntime ("org.springframework.boot:spring-boot-starter-tomcat")
 	testCompile ("org.springframework.boot:spring-boot-starter-test")

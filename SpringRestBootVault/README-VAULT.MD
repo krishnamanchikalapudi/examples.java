@@ -4,7 +4,8 @@
 
 2. Starting the Dev Server
 `````
-vault server -dev &
+vault server -dev -dev-root-token-id="00000000-0000-0000-0000-000000000000" -dev-listen-address="127.0.0.1:8201" & 
+
 `````
 
 3. Set vault address
@@ -19,7 +20,7 @@ vault status
 
 5. Writing a Secret
 `````
-vault kv put secret/springrestbootvault db.host=krisdb.example.com db.username=HelloName db.password=HelloPassword
+vault kv put secret/springrestbootvault db.url=jdbc:mysql://localhost:3306/springbootdb db.username=HelloName db.password=HelloPassword
 `````
 
 6. Getting a Secret

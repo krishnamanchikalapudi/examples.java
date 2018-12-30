@@ -4,7 +4,7 @@
 
 # Steps
 - [Setup & config Vault](./README-VAULT.MD)
-- Copy & paste vault token to src/main/resources/bootstrap.yml
+- Copy & paste 'root vault token' to src/main/resources/bootstrap.yml
 - [Gradle build instructions](./README-GRADLE.MD)
 - [API test instructions](./README-REST.MD)
 

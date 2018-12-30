@@ -1,4 +1,6 @@
 # compiled output
+.vscode
+.vscode/
 *.code-workspace
 .gradle/
 .class

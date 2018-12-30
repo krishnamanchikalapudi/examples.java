@@ -37,3 +37,14 @@ content-type:application/json
     "firstName": "Krishna"
 }
 ```
+- Console: output
+```
+content-type: application/json
+Vault info::
+----------------------------------------
+Configuration properties
+                 db.url = jdbc:mysql://localhost:3306/springbootdb
+                 db.username = HelloName
+                 db.password = HelloPassword
+----------------------------------------
+```
