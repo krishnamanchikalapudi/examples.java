@@ -21,11 +21,16 @@ gradle clean bootRun -Dserver.port=8080
 
 ### execute via war
 `````
-java -jar build/libs/springrestboot.war --server.port=8080 &
+java -jar build/libs/springrestbootk8secret.war --server.port=8080 &
 `````
 
-### check process
+### linux - check process
 `````
-ps -ef | grep springrestboot.war | awk '{print $2}'
+ps -ef | grep springrestbootk8secret.war | awk '{print $2}'
 netstat -lntp | grep 8080
+`````
+
+### mac - check process
+`````
+lsof -nP -iTCP:8200
 `````

@@ -72,7 +72,8 @@ docker container ls -a
 
 ### Stop containers & pattern  'docker container stop CONTAINER_ID'
 `````
-docker container stop eb34bce6bfd0
+container_id=`docker container ls -a | grep springrestbootdocker | awk '{print $1}'`
+docker container stop $container_id && docker system prune -f
 `````
 
 

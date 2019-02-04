@@ -1,3 +1,8 @@
+# Pre-requisite
+- Java 1.8 or higher
+- [consul](https://www.consul.io)
+- gradle 4.0 or higher
+
 # Eclipse
 `````
 gradle cleanEclipseClasspath eclipse

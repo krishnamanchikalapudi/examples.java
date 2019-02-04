@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Ingress
+metadata:
+  name: springbootk8s-ingress
+spec:
+  selector:
+    app: springbootk8s
+  rules:
+  - host: mylocalhost.example
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: springbootk8s-svc
+          servicePort: 8080

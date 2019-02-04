@@ -1,4 +1,8 @@
 
+# Pre-requisite
+- Java 1.8 or higher
+- Maven 3.0 or higher
+
 ### Generate jar from WSDL/XSD
 ``````
 mvn clean install
