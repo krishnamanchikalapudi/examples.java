@@ -41,3 +41,29 @@ Successfully built 84b4dec0b4e6
 Successfully tagged springrestbootk8s:latest
 `````
 
+
+3. Run the docker
+`````
+docker container run -d -p 8080:8080 springrestbootk8s:latest
+`````
+
+4. Test the container service: http://localhost:8080/v1/123
+- Request: header
+```
+content-type:application/json
+```
+
+- Response: header
+```
+	status: 200
+	CurrentTime:
+
+```
+
+- Response: body
+```
+{
+    "id": "123",
+    "firstName": "Krishna"
+}
+```
