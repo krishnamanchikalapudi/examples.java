@@ -4,9 +4,8 @@
 - gradle 4.0 or higher
 
 # Steps
-- [Setup & config Vault](./README-K8S.MD)
-- Copy & paste 'root vault token' to src/main/resources/bootstrap.yml
 - [Gradle build instructions](./README-GRADLE.MD)
+- [Deploy instructions](./README-K8S.MD)
 - [API test instructions](./README-REST.MD)
 
 # Dev guidelines

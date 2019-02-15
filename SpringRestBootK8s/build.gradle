@@ -5,14 +5,22 @@ ext {
 	springVersion = '2.1.1.RELEASE'
     springCloudVersion = 'Finchley.SR2'
 	springCloudK8Version = '0.3.0.RELEASE'
+	spotbugsVersion = '3.1.9'
 }
 
 buildscript {
     repositories {
         mavenCentral()
+		maven { 
+			url 'https://plugins.gradle.org/m2/'
+		}
+		maven { 
+			url 'http://repo.spring.io/libs-release'  
+		}
     }
 	dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE")
+		classpath("gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.6.9")
     }
 }
 
@@ -20,6 +28,7 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'war'
+apply plugin: "com.github.spotbugs"
 
 bootRun {
 	jvmArgs = ["-XX:MaxPermSize=256m", "-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
@@ -27,7 +36,12 @@ bootRun {
 
 repositories {
     mavenCentral()
-    maven { url 'http://repo.spring.io/libs-release' }
+	maven { 
+		url 'https://plugins.gradle.org/m2/'
+	}
+	maven { 
+		url 'http://repo.spring.io/libs-release'  
+	}
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -105,3 +119,7 @@ tasks.withType(JavaCompile) {
 }
 
 task stage(dependsOn: ['build', 'clean'])
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+  reports.xml.enabled = false
+  reports.html.enabled = true
+}

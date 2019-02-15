@@ -8,6 +8,7 @@
 `````
 docker image build -t springrestbootk8s:latest .
 `````
+
 output
 `````
 Krishnas-MBP-2:SpringRestBootK8s krishnamanchikalapudi$ docker image build -t springrestbootk8s:latest .
@@ -45,18 +46,19 @@ Successfully tagged springrestbootk8s:latest
 docker container run -d -p 8080:8080 springrestbootk8s:latest
 `````
 
-4. Test the container service
-### GET url: http://localhost:8080/v1/123
+4. Test the container service: http://localhost:8080/v1/123
 - Request: header
 ```
 content-type:application/json
 ```
+
 - Response: header
 ```
 	status: 200
 	CurrentTime:
 
 ```
+
 - Response: body
 ```
 {
