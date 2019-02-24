@@ -1,17 +1,13 @@
-### Eclipse
-`````
-gradle cleanEclipseClasspath eclipse
-`````
 
 ### Clean Build
 `````
-gradle clean build
+mvn clean install -DskipTests=true
 `````
 
 
-### Clean Build skipTests
+### Display the project dependencies.
 `````
-gradle clean build -x test --stacktrace --warning-mode all
+mvn dependency:tree
 `````
 
 ### boot run
@@ -24,10 +20,12 @@ gradle bootRun -Dserver.port=8080 &
 gradle bootRun -Dserver.port=8080 -Dagentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=6666 &
 `````
 
-### execute via war
+### execute via java command
 `````
-java -jar build/libs/springrestboot.war --server.port=8080 &
+java -jar target/springrestboot-1.0.0-SNAPSHOT.jar  --server.port=8080 &
 `````
+
+mvn package && java -jar target/gs-spring-boot-0.1.0.jar
 
 ### check process
 `````

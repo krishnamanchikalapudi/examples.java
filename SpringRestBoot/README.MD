@@ -5,6 +5,8 @@
 # Steps
 - [Gradle build instructions](./README-GRADLE.MD)
 - [API test instructions](./README-REST.MD)
+- Swagger / OpenAPI 2 documentation: http://localhost:8080/swagger-ui.html
+
 
 # Dev guidelines
 - Execute spring boot service on local machine.

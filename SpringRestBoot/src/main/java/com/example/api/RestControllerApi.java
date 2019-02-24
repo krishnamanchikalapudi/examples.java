@@ -1,5 +1,7 @@
 package com.example.api;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import org.springframework.http.HttpHeaders;
@@ -15,20 +17,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 import com.example.constant.Constants;
 import com.example.model.Person;
 
 @RestController
+@EnableSwagger2
 public class RestControllerApi {
-	@RequestMapping(Constants.URL_HOME)
+
+	@RequestMapping(value = { Constants.URL_HOME }, method = RequestMethod.GET)
 	public String home() {
 		return "Welcome to Spring Rest + Boot example";
 	}
 
 	@RequestMapping(value = { Constants.URL_BY_ID }, method = RequestMethod.GET, consumes = {
-			MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public @ResponseBody ResponseEntity<Person> jsonId(@PathVariable String id, @RequestHeader HttpHeaders reqHeaders) {
-		System.out.println("content-type: " + MediaType.APPLICATION_JSON_VALUE);
+		System.out.println("USER: content-type: " + reqHeaders.getContentType().toString());
+		
 		return id(id, reqHeaders);
 	}
 

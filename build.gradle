@@ -1,0 +1,75 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext.springVersion = "2.1.3.RELEASE"
+ext.pluginDockerVersion = "0.21.0"
+ext.jacksonDataFormatVersion = "2.9.8"
+ext.swagger2Version = "2.9.2"
+
+ext.libraries = [
+    springboot_web: "org.springframework.boot:spring-boot-starter-web:${springVersion}",
+    jackson_xml: "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonDataFormatVersion}",
+    swagger2: [
+        "io.springfox:springfox-swagger2:${swagger2Version}",
+        "io.springfox:springfox-swagger-ui:${swagger2Version}"
+    ],
+
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+]
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'http://central.maven.org/maven2' }
+        maven { url 'http://repo.spring.io/plugins-release' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springVersion}")
+        classpath("com.palantir.gradle.docker:gradle-docker:${pluginDockerVersion}")
+    }
+}
+
+bootRun {
+	jvmArgs = ["-XX:MaxPermSize=256m", "-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java'
+		}
+		resources {
+			srcDir 'src/main/resources'
+		}
+	}
+	test {
+		java {
+			srcDir 'src/test/java'
+		}
+		resources {
+			srcDir 'src/test/resources'
+		}
+	}
+}
+
+tasks.withType(Test) {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.incremental = true
+}
+
+task stage(dependsOn: ['build', 'clean'])
