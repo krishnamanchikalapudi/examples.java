@@ -22,6 +22,8 @@
 		<plugin.jarsigner.version>3.0.0</plugin.jarsigner.version>
 		<plugin.pdf.version>1.4</plugin.pdf.version>
 		<plugin.jar.version>3.1.1</plugin.jar.version>
+		<plugin.project-info.version>3.0.0</plugin.project-info.version>
+		<plugin.jib.version>1.0.1</plugin.jib.version>
 		<junit.version>4.12</junit.version>
 	</properties>
 	<dependencyManagement>
@@ -86,6 +88,27 @@
 					<outputDirectory>${reports.outputDirectory}/site</outputDirectory>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${plugin.project-info.version}</version>
+				<configuration>
+					<outputDirectory>${reports.outputDirectory}/project-info</outputDirectory>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>dependencies</report>
+							<report>project-team</report>
+							<report>summary</report>
+							<report>license</report>
+							<report>scm</report>
+							<report>issue-tracking</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
 			<plugin>
 				<!-- mvn checkstyle:checkstyle -->
 				<groupId>org.apache.maven.plugins</groupId>
@@ -153,8 +176,38 @@
 	</reporting>
 
 	<build>
+		<directory>${project.basedir}/target</directory>
+		<outputDirectory>${project.build.directory}/classes</outputDirectory>
+		<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>${project.basedir}/src/test/resources</directory>
+			</testResource>
+		</testResources>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>com.google.cloud.tools</groupId>
+					<artifactId>jib-maven-plugin</artifactId>
+					<version>${plugin.jib.version}</version>
+					<configuration>
+						<to>
+							<image>hub.docker.com/krishnamanchikalapudi</image>
+						</to>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>${plugin.project-info.version}</version>
+				</plugin>
 				<plugin>
 					<!-- mvn pdf:pdf  -->
 					<groupId>org.apache.maven.plugins</groupId>
