@@ -106,16 +106,4 @@
 			<version>1.7.8</version>
 		</dependency>
 	</dependencies>
-	<repositories>
-		<repository>
-			<id>frb-maven-virtual</id>
-			<name>frb-maven-virtual</name>
-			<url>https://artrepo.firstrepublic.com/artifactory/frb-maven-virtual</url>
-		</repository>
-		<repository>
-			<id>frb-maven-remote</id>
-			<name>frb-maven-remote</name>
-			<url>https://artrepo.firstrepublic.com/artifactory/frb-maven-remote</url>
-		</repository>
-	</repositories>
 </project>
