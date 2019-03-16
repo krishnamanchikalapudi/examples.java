@@ -26,6 +26,10 @@
 		<plugin.jib.version>1.0.1</plugin.jib.version>
 		<junit.version>4.12</junit.version>
 	</properties>
+	<modules>
+		<module>SpringRestBoot</module>
+	</modules>
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -344,17 +348,22 @@
 						</execution>
 					</executions>
 				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring.version}</version>
-				<configuration>
-					<addResources>true</addResources>
-				</configuration>
-			</plugin>
+			
 		</plugins>
 	</build>
 	<repositories>
