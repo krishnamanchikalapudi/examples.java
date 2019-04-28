@@ -1,0 +1,74 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'http://central.maven.org/maven2/' }
+    }
+    dependencies {
+         // classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.4.RELEASE")
+		classpath('org.apache.commons:commons-lang3:3.9')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group = 'com.krishna.commons'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'http://central.maven.org/maven2/' }
+}
+
+configurations {
+	providedRuntime
+}
+
+dependencies {
+	compile('org.apache.commons:commons-lang3:3.9')
+	testCompile('org.testng:testng:6.9.9')
+}
+test {
+    useTestNG()
+}
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'Commons from examples.java',  
+        	'Implementation-Version': version,
+        	'Main-Class': 'com.krishna.main.AppMain'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java'
+		}
+		resources {
+			srcDir 'src/main/resources'
+		}
+	}
+	test {
+		java {
+			srcDir 'src/test/java'
+		}
+		resources {
+			srcDir 'src/test/resources'
+		}
+	}
+}
+
+tasks.withType(Test) {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.incremental = true
+}
+
+task stage(dependsOn: ['build', 'clean'])

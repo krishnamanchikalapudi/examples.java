@@ -28,8 +28,16 @@ gradle/**
 *.launch
 .settings/
 *.sublime-workspace
+*.code-workspace
 *.class
 *.jar
+*.log
+build/
+/build
+build/*
+target/
+/target
+/target/*
 
 # misc
 /.sass-cache
