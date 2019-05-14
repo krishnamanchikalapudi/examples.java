@@ -1,0 +1,99 @@
+buildscript {
+    repositories {
+        mavenCentral()
+		maven { url 'http://repo.spring.io/plugins-release' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.4.RELEASE")
+        classpath("com.palantir.gradle.docker:gradle-docker:0.20.1")
+		classpath("org.apache.opennlp:opennlp-tools:1.9.1")
+		classpath("org.apache.opennlp:opennlp-uima:1.9.1")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.palantir.docker'
+apply plugin: 'war'
+
+
+group = 'com.example.bot'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+	maven { url 'http://repo.spring.io/plugins-release' }
+}
+
+configurations {
+	providedRuntime
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web:2.1.3.RELEASE')
+	compile('com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.8')
+	compile('org.apache.opennlp:opennlp-tools:1.9.1')
+	compile('org.apache.opennlp:opennlp-uima:1.9.1')
+	compile('io.springfox:springfox-swagger2:2.9.2')
+	compile('io.springfox:springfox-swagger-ui:2.9.2')
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.junit.jupiter:junit-jupiter-api:5.4.2')
+	testCompile('org.junit.jupiter:junit-jupiter-engine:5.4.2')
+}
+
+bootWar {
+	excludeDevtools = false
+	manifest {
+		attributes 'Start-Class': 'com.example.config.SpringRestBootDockerApplication'
+	}
+    mainClassName = 'com.example.config.SpringRestBootDockerApplication'
+    baseName 'chatbot'
+	version '1.0.0'
+    archiveName 'springbootOpenNlp.war'
+}
+
+bootRun {
+	jvmArgs = ["-XX:MaxPermSize=256m", "-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
+    main = 'com.example.config.SpringRestBootDockerApplication'
+    systemProperties = System.properties
+}
+/*
+docker {
+	dependsOn build
+	name "${project.group}/${bootWar.baseName}"
+	files bootWar.archivePath
+	buildArgs(['JAR_FILE':"${bootWar.archivePath}"])
+}
+*/
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java'
+		}
+		resources {
+			srcDir 'src/main/resources'
+		}
+	}
+	test {
+		java {
+			srcDir 'src/test/java'
+		}
+		resources {
+			srcDir 'src/test/resources'
+		}
+	}
+}
+
+tasks.withType(Test) {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.incremental = true
+}
+
+task stage(dependsOn: ['build', 'clean'])

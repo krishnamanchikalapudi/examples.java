@@ -1,0 +1,107 @@
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+ext {
+	springVersion = '2.1.1.RELEASE'
+    springCloudVersion = 'Finchley.SR2'
+	springCloudK8Version = '0.3.0.RELEASE'
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+	dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+bootRun {
+	jvmArgs = ["-XX:MaxPermSize=256m", "-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'http://repo.spring.io/libs-release' }
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencyManagement {
+    imports {
+		mavenBom "org.springframework.cloud:spring-cloud-starter-kubernetes:${springCloudK8Version}"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+dependencies {
+	compile ("org.springframework.boot:spring-boot-starter-web") 
+	compile ("org.springframework.boot:spring-boot-starter-actuator")
+	compile("org.springframework.boot:spring-boot-configuration-processor")
+	compile ("org.springframework.cloud:spring-cloud-starter-kubernetes")
+	providedRuntime ("org.springframework.boot:spring-boot-starter-tomcat")
+	testCompile ("org.springframework.boot:spring-boot-starter-test")
+}
+
+/*
+bootJar {
+	manifest {
+		attributes 'Start-Class': 'com.example.config.Application'
+	}
+    mainClassName 'com.example.config.Application'
+
+    baseName 'springrestbootk8secret'
+	version '0.1.0'
+	archiveName 'springrestbootk8secret.jar'
+}
+*/
+
+bootWar {
+	excludeDevtools = false
+	manifest {
+		attributes 'Start-Class': 'com.example.config.Application'
+	}
+    mainClassName = 'com.example.config.Application'
+    baseName 'springrestbootk8secret'
+	  version '0.1.0'
+    archiveName 'springrestbootk8secret.war'
+}
+bootRun {
+    main = 'com.example.config.Application'
+    systemProperties = System.properties
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java'
+		}
+		resources {
+			srcDir 'src/main/resources'
+		}
+	}
+	test {
+		java {
+			srcDir 'src/test/java'
+		}
+		resources {
+			srcDir 'src/test/resources'
+		}
+	}
+}
+
+tasks.withType(Test) {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.incremental = true
+}
+
+task stage(dependsOn: ['build', 'clean'])

@@ -21,7 +21,7 @@ spec:
         app: springrestbootk8s
     spec:
       containers:
-      - image: docker.io/krishnamanchikalapudi/springrestbootk8s:latest
+      - image: docker.io/krishnamanchikalapudi/springrestbootdocker:latest
         imagePullPolicy: Always
         name: springrestbootk8s
         ports:

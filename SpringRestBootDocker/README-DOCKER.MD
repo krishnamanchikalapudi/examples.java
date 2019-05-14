@@ -80,7 +80,7 @@ docker container stop $container_id && docker system prune -f
 ### Push an image or a repository to a https://hub.docker.com & pattern 'docker push <hub-user>/<repo-name>:<tag>'
 `````
 docker tag springrestbootdocker iamkittu/springrestbootdocker
-docker push iamkittu//springrestbootdocker
+docker push iamkittu/springrestbootdocker
 
 `````
 

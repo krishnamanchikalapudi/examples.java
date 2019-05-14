@@ -1,0 +1,95 @@
+group = 'com.example.aws'
+version = '0.0.1-SNAPSHOT'
+
+buildscript {
+	ext {
+		springVersion = '2.0.3.RELEASE'
+	}
+    repositories {
+        mavenCentral()
+        maven { url 'http://repo.spring.io/plugins-release' }
+    }
+    dependencies {
+         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+bootRun {
+	jvmArgs = ["-XX:MaxPermSize=256m", "-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'http://repo.spring.io/libs-release' }
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+/*
+bootJar {
+	manifest {
+		attributes 'Start-Class': 'com.example.config.Application'
+	}
+    mainClassName 'com.example.config.Application'
+
+    baseName 'springrestboots2i'
+	version '0.1.0'
+	archiveName 'springrestboots2i.jar'
+}
+*/
+
+bootWar {
+	excludeDevtools = false
+	manifest {
+		attributes 'Start-Class': 'com.example.config.Application'
+	}
+    mainClassName = 'com.example.config.Application'
+    baseName 'springrestboots2i'
+	  version '0.1.0'
+    archiveName 'springrestboots2i.war'
+}
+bootRun {
+    main = 'com.example.config.Application'
+    systemProperties = System.properties
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java'
+		}
+		resources {
+			srcDir 'src/main/resources'
+		}
+	}
+	test {
+		java {
+			srcDir 'src/test/java'
+		}
+		resources {
+			srcDir 'src/test/resources'
+		}
+	}
+}
+
+tasks.withType(Test) {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.incremental = true
+}
+
+task stage(dependsOn: ['build', 'clean'])

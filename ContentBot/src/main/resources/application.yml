@@ -1,0 +1,13 @@
+server:
+   servlet:
+    context-path: /
+     
+spring:
+  application:
+    name: springrestbootdocker
+ 
+logging:
+  level:
+    root: INFO
+  pattern:
+    console: "[%p] %d %c %M - %m%n"
