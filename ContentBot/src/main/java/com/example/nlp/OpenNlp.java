@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -51,9 +52,9 @@ public class OpenNlp {
 	 */
 	static {
 		questionAnswer.put("greeting", "Hello, how can I help you?");
-		questionAnswer.put("product-inquiry",
-				"Product is a TipTop mobile phone. It is a smart phone with latest features like touch screen, blutooth etc.");
-		questionAnswer.put("price-inquiry", "Price is $300");
+		questionAnswer.put("design-inquiry",
+				"Design is already approved. Refer JIRA# EAW-1111111");
+		questionAnswer.put("library-inquiry", "Artrepo libaries approved");
 		questionAnswer.put("conversation-continue", "What else can I help you with?");
 		questionAnswer.put("conversation-complete", "Nice chatting with you. Bbye.");
 
@@ -127,7 +128,10 @@ public class OpenNlp {
 	private DoccatModel trainCategorizerModel() throws FileNotFoundException, IOException {
 		// faq-categorizer.txt is a custom training data with categories as per our chat
 		// requirements.
-		InputStreamFactory inputStreamFactory = new MarkableFileInputStreamFactory(new File("faq-categorizer.txt"));
+				
+		URL url = this.getClass().getClassLoader().getResource("models/faq-categorizer.txt");
+		// System.out.println("category file path: "+ url.getFile());
+		InputStreamFactory inputStreamFactory = new MarkableFileInputStreamFactory(new File(url.getFile() )) ;
 		ObjectStream<String> lineStream = new PlainTextByLineStream(inputStreamFactory, StandardCharsets.UTF_8);
 		ObjectStream<DocumentSample> sampleStream = new DocumentSampleStream(lineStream);
 
@@ -205,7 +209,7 @@ public class OpenNlp {
 
 			// Tokenize sentence.
 			String[] tokens = myCategorizer.tokenize(sentence);
-			System.out.println("Tokenizer : " + Arrays.stream(tokens).collect(Collectors.joining(" | ")));
+			// System.out.println("Tokenizer : " + Arrays.stream(tokens).collect(Collectors.joining(" | ")));
 
 			return tokens;
 
@@ -230,7 +234,7 @@ public class OpenNlp {
 
 			// Tag sentence.
 			String[] posTokens = myCategorizer.tag(tokens);
-			System.out.println("POS Tags : " + Arrays.stream(posTokens).collect(Collectors.joining(" | ")));
+			// System.out.println("POS Tags : " + Arrays.stream(posTokens).collect(Collectors.joining(" | ")));
 
 			return posTokens;
 
@@ -256,7 +260,7 @@ public class OpenNlp {
 			// Tag sentence.
 			LemmatizerME myCategorizer = new LemmatizerME(new LemmatizerModel(modelIn));
 			String[] lemmaTokens = myCategorizer.lemmatize(tokens, posTags);
-			System.out.println("Lemmatizer : " + Arrays.stream(lemmaTokens).collect(Collectors.joining(" | ")));
+			// System.out.println("Lemmatizer : " + Arrays.stream(lemmaTokens).collect(Collectors.joining(" | ")));
 
 			return lemmaTokens;
 
