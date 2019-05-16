@@ -12,4 +12,6 @@ mvn clean install -DskipTests -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon
 # execute
 `````
 java -jar target/chatbot-0.0.1.jar --server.port=8080 &
+
+java -cp target/chatbot-0.0.1.jar com.example.nlp.OpenNlp
 `````

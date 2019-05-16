@@ -39,8 +39,6 @@ import opennlp.tools.util.model.ModelUtil;
  * Custom chat bot or chat agent for automated chat replies for FAQs. It uses
  * different features of Apache OpenNLP for understanding what user is asking
  * for. NLP is natural language processing.
- * 
- * @author itsallbinary
  *
  */
 public class OpenNlp {
@@ -52,15 +50,15 @@ public class OpenNlp {
 	 */
 	static {
 		questionAnswer.put("greeting", "Hello, how can I help you?");
-		questionAnswer.put("design-inquiry",
-				"Design is already approved. Refer JIRA# EAW-1111111");
+		questionAnswer.put("design-inquiry", "Design is already approved. Refer JIRA# EAW-1111111");
 		questionAnswer.put("library-inquiry", "Artrepo libaries approved");
 		questionAnswer.put("conversation-continue", "What else can I help you with?");
 		questionAnswer.put("conversation-complete", "Nice chatting with you. Bbye.");
 
 	}
-	
-	OpenNlp() {}
+
+	OpenNlp() {
+	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
 
@@ -115,7 +113,6 @@ public class OpenNlp {
 			}
 
 		}
-
 	}
 
 	/**
@@ -128,10 +125,10 @@ public class OpenNlp {
 	private DoccatModel trainCategorizerModel() throws FileNotFoundException, IOException {
 		// faq-categorizer.txt is a custom training data with categories as per our chat
 		// requirements.
-				
+
 		URL url = this.getClass().getClassLoader().getResource("models/faq-categorizer.txt");
 		// System.out.println("category file path: "+ url.getFile());
-		InputStreamFactory inputStreamFactory = new MarkableFileInputStreamFactory(new File(url.getFile() )) ;
+		InputStreamFactory inputStreamFactory = new MarkableFileInputStreamFactory(new File(url.getFile()));
 		ObjectStream<String> lineStream = new PlainTextByLineStream(inputStreamFactory, StandardCharsets.UTF_8);
 		ObjectStream<DocumentSample> sampleStream = new DocumentSampleStream(lineStream);
 
@@ -178,7 +175,7 @@ public class OpenNlp {
 	private String[] breakSentences(String data) throws FileNotFoundException, IOException {
 		// Better to read file once at start of program & store model in instance
 		// variable. but keeping here for simplicity in understanding.
-		
+
 		try (InputStream modelIn = this.getClass().getClassLoader().getResourceAsStream("models/en-sent.bin")) {
 
 			SentenceDetectorME myCategorizer = new SentenceDetectorME(new SentenceModel(modelIn));
@@ -209,7 +206,8 @@ public class OpenNlp {
 
 			// Tokenize sentence.
 			String[] tokens = myCategorizer.tokenize(sentence);
-			// System.out.println("Tokenizer : " + Arrays.stream(tokens).collect(Collectors.joining(" | ")));
+			// System.out.println("Tokenizer : " +
+			// Arrays.stream(tokens).collect(Collectors.joining(" | ")));
 
 			return tokens;
 
@@ -234,7 +232,8 @@ public class OpenNlp {
 
 			// Tag sentence.
 			String[] posTokens = myCategorizer.tag(tokens);
-			// System.out.println("POS Tags : " + Arrays.stream(posTokens).collect(Collectors.joining(" | ")));
+			// System.out.println("POS Tags : " +
+			// Arrays.stream(posTokens).collect(Collectors.joining(" | ")));
 
 			return posTokens;
 
@@ -251,8 +250,7 @@ public class OpenNlp {
 	 * @throws InvalidFormatException
 	 * @throws IOException
 	 */
-	private String[] lemmatizeTokens(String[] tokens, String[] posTags)
-			throws InvalidFormatException, IOException {
+	private String[] lemmatizeTokens(String[] tokens, String[] posTags) throws InvalidFormatException, IOException {
 		// Better to read file once at start of program & store model in instance
 		// variable. but keeping here for simplicity in understanding.
 		try (InputStream modelIn = this.getClass().getClassLoader().getResourceAsStream("models/en-lemmatizer.bin")) {
@@ -260,7 +258,8 @@ public class OpenNlp {
 			// Tag sentence.
 			LemmatizerME myCategorizer = new LemmatizerME(new LemmatizerModel(modelIn));
 			String[] lemmaTokens = myCategorizer.lemmatize(tokens, posTags);
-			// System.out.println("Lemmatizer : " + Arrays.stream(lemmaTokens).collect(Collectors.joining(" | ")));
+			// System.out.println("Lemmatizer : " +
+			// Arrays.stream(lemmaTokens).collect(Collectors.joining(" | ")));
 
 			return lemmaTokens;
 
