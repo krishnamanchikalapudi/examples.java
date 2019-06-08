@@ -16,12 +16,15 @@ if [ ! -z "$varContainerImageExists" ]; then
 fi
 '
 
-export APP_NAME='springrestbootk8'
+export APP_NAME='springrestbootk8s'
+export APP_YAML=${APP_NAME}.yml
 export APP_NS=${APP_NAME}-ns
 export DOCKER_IMAGE='docker.io/krishnamanchikalapudi/springrestbootk8:latest'
 export APP_PORT='8080'
 
-
+printf "\n%s\n" "----------- [minikube] INFO:  "
+minikube version
+printf "\n%s\n" "----------- [kubectl] INFO:  "
 kubectl version
 
 printf "\n\n%s\n" 

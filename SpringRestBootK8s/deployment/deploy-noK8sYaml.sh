@@ -80,13 +80,15 @@ printf "\n\n%s\n" " ------ exposing app"
 --type: Type for this service: ClusterIP, NodePort, LoadBalancer, or ExternalName. Default is ClusterIP.
 '
 if $isNsExists ; then   # isNsExists=true
-    kubectl expose --namespace=${APP_NS} --name=${APP_NAME} --type="NodePort" --port=${APP_PORT} --target-port=${APP_PORT} --allow-missing-template-keys=true
+    # kubectl expose --namespace=${APP_NS} --name=${APP_NAME} --type="NodePort" --port=${APP_PORT} --target-port=${APP_PORT} --allow-missing-template-keys=true
+    kubectl expose deployment/${APP_NAME}  --namespace=${APP_NS} --type="NodePort" --port ${APP_PORT}
+
 else   # isNsExists=false
     kubectl expose --name=${APP_NAME} --type="NodePort" --port=${APP_PORT} --target-port=${APP_PORT} --allow-missing-template-keys=true
 fi
 
 printf "\n\n%s\n" " ------ Details of all the Service objects deployed " 
-kubectl describe services/${APP_NAME}
+kubectl describe services/${APP_NAME} --namespace=${APP_NS}
 
 
 # kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
@@ -98,7 +100,11 @@ minikube dashboard &
 
 sleep 5
 
-curl http://${HOST_IP}:${APP_PORT}/v1/
+export NODE_PORT=$(kubectl get services/${APP_NAME} --namespace=${APP_NS} -o go-template='{{(index .spec.ports 0).nodePort}}')
+echo NODE_PORT=$NODE_PORT
+
+
+curl $(minikube ip):${NODE_PORT}/v1/
 
 sleep 2
 printf "\n%s\n\n" "----------- [START] DEPLOY: ${DATE_TIME} "

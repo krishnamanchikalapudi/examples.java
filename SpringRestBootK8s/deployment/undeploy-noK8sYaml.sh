@@ -11,6 +11,8 @@ else # false
     # kubectl delete pods,services,deployments springrestbootk8 --force --ignore-not-found=true 
 fi
 
+kubectl delete -f namespace-role.yaml --ignore-not-found=true --include-uninitialized=true
+
 sleep 15
 kubectl get pods | grep ${APP_NAME} | awk '{print $1}'
 # kubectl get pods | grep springrestbootk8 | awk '{print $1}'
