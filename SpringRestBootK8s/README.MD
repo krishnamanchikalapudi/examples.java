@@ -4,8 +4,9 @@
 - gradle 4.0 or higher
 
 # Steps
-- [Gradle build instructions](./README-GRADLE.MD)
-- [Deploy instructions](./README-K8S.MD)
+- [Build base image](./build.sh)
+- [Deploy script](./deployment/deploy.sh)
+- [UnDeploy script](./deployment/undeploy.sh)
 - [API test instructions](./README-REST.MD)
 
 # Dev guidelines

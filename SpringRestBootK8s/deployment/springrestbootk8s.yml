@@ -12,7 +12,7 @@ spec:
   selector:
     matchLabels:
       app: springrestbootk8s-app
-  replicas: 3 # tells deployment to run 3 pods matching the template
+  replicas: 1 # tells deployment to run 3 pods matching the template
   template: # create pods using pod definition in this template
     metadata:
       labels:
@@ -52,19 +52,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.allow-http: "true"
 spec:
-  #tls:
-  #- secretName: springrestbootk8s-tls-secret
   backend:
     serviceName: springrestbootk8s-service
     servicePort: 8080
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: springrestbootk8s-tls-secret
-  namespace: default
-data:
-  tls.crt: hello #base64 hash of your cert
-  tls.key: password #base64 hash of your key
-type: Opaque
 ---

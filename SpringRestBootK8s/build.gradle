@@ -2,7 +2,7 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 ext {
-	springVersion = '2.1.1.RELEASE'
+	springVersion = '2.1.5.RELEASE'
     springCloudVersion = 'Finchley.SR2'
 	springCloudK8Version = '0.3.0.RELEASE'
 	spotbugsVersion = '3.1.9'
@@ -19,7 +19,7 @@ buildscript {
 		}
     }
 	dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.5.RELEASE")
 		classpath("gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.6.9")
     }
 }
@@ -69,9 +69,9 @@ bootJar {
 		attributes 'Start-Class': 'com.example.config.SpringRestBootDockerApplication'
 	}
     mainClassName 'com.example.config.SpringRestBootDockerApplication'
-    baseName 'springrestbootk8'
+    baseName 'springrestbootk8s'
 	version '0.1.0'
-	archiveName 'springrestbootk8.jar'
+	archiveName 'springrestbootk8s.jar'
 }
 
 /*
@@ -81,9 +81,9 @@ bootWar {
 		attributes 'Start-Class': 'com.example.config.SpringRestBootDockerApplication'
 	}
     mainClassName = 'com.example.config.SpringRestBootDockerApplication'
-    baseName 'springrestbootk8'
+    baseName 'springrestbootk8s'
 	  version '0.1.0'
-    archiveName 'springrestbootk8.war'
+    archiveName 'springrestbootk8s.war'
 }
 */
 bootRun {
