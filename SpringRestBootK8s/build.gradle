@@ -27,7 +27,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'war'
+//apply plugin: 'jar'
 apply plugin: "com.github.spotbugs"
 
 bootRun {
@@ -59,35 +59,35 @@ dependencies {
 	compile ("org.springframework.boot:spring-boot-starter-actuator")
 	compile("org.springframework.boot:spring-boot-configuration-processor")
 	compile ("org.springframework.cloud:spring-cloud-starter-kubernetes")
-	providedRuntime ("org.springframework.boot:spring-boot-starter-tomcat")
+	// providedRuntime ("org.springframework.boot:spring-boot-starter-tomcat")
 	testCompile ("org.springframework.boot:spring-boot-starter-test")
 }
 
-/*
+
 bootJar {
 	manifest {
-		attributes 'Start-Class': 'com.example.config.Application'
+		attributes 'Start-Class': 'com.example.config.SpringRestBootDockerApplication'
 	}
-    mainClassName 'com.example.config.Application'
-
+    mainClassName 'com.example.config.SpringRestBootDockerApplication'
     baseName 'springrestbootk8'
 	version '0.1.0'
 	archiveName 'springrestbootk8.jar'
 }
-*/
 
+/*
 bootWar {
 	excludeDevtools = false
 	manifest {
-		attributes 'Start-Class': 'com.example.config.Application'
+		attributes 'Start-Class': 'com.example.config.SpringRestBootDockerApplication'
 	}
-    mainClassName = 'com.example.config.Application'
+    mainClassName = 'com.example.config.SpringRestBootDockerApplication'
     baseName 'springrestbootk8'
 	  version '0.1.0'
     archiveName 'springrestbootk8.war'
 }
+*/
 bootRun {
-    main = 'com.example.config.Application'
+    main = 'com.example.config.SpringRestBootDockerApplication'
     systemProperties = System.properties
 }
 

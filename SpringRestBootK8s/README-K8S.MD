@@ -85,6 +85,12 @@ docker push krishnamanchikalapudi/springrestbootk8s
 ### NO YAML files
 -  deploy service
 ````````````
+cd deployment
+kubectl apply -f kustomization.yaml 
+minikube dashboard
+
+kubectl expose deployment springrestbootk8s --type=8080 --name=springrestbootk8s-service
+
 kubectl run springrestbootk8s --image=docker.io/krishnamanchikalapudi/springrestbootk8s:latest --labels=app=springrestbootk8s --port=8080 --replicas=1
 kubectl expose deployment springrestbootk8s --port=8080 --target-port=9376 --name=springrestbootk8s
 
