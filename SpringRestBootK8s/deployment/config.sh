@@ -3,8 +3,6 @@
 DATE=`date +%Y-%m-%d`
 DATE_TIME=`date '+%Y-%m-%d %H:%M:%S'`
 
-export isNsExists=true
-export isContainerImageExists=false
 : '
 varNamespace=$1
 if [ ! -z "$varNamespace" ]; then
@@ -19,7 +17,7 @@ fi
 export APP_NAME='springrestbootk8s'
 export APP_YAML=${APP_NAME}.yml
 export APP_NS=${APP_NAME}-ns
-export DOCKER_IMAGE='docker.io/krishnamanchikalapudi/springrestbootk8:latest'
+export DOCKER_IMAGE="docker.io/krishnamanchikalapudi/${APP_NAME}:latest"
 export APP_PORT='8080'
 
 printf "\n%s\n" "----------- [minikube] INFO:  "
@@ -29,10 +27,10 @@ kubectl version
 
 printf "\n\n%s\n" 
 
+: '
 if $isNsExists ; then  # isNsExists=true
     printf "\n\n%s\n%s\n" "-- [var] isNsExists: ${isNsExists}" "-- Namespace exists = true "
 else  # false
     printf "\n\n%s\n%s\n" "-- [var] isNsExists: ${isNsExists}" "-- Namespace exists: false "
 fi
-
-
+'
