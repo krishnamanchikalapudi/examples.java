@@ -18,17 +18,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.constant.Constants;
 import com.example.model.Person;
-import com.example.service.K8SecretConfig;
+import com.example.service.VaultConfig;
 
 @RestController
 public class RestControllerApi {
 
 	@Autowired
-	private K8SecretConfig secretConfig;
+	private VaultConfig vaultConfig;
 
 	@RequestMapping(Constants.URL_HOME)
 	public String home() {
-		return "Welcome to Spring Rest + Boot + K8 secret example";
+		// System.out.println("Vault info:: " + vaultConfig.toString());
+
+		StringBuilder sb = new StringBuilder("Welcome to Spring Rest + Boot + K8 Secret example \n ");
+			sb.append(vaultConfig.toString());
+
+		return sb.toString();
 	}
 
 	@RequestMapping(value = { Constants.URL_BY_ID }, method = RequestMethod.GET, consumes = {
@@ -42,9 +47,10 @@ public class RestControllerApi {
 		MultiValueMap<String, String> responseHeaders = new LinkedMultiValueMap<String, String>();
 		responseHeaders.set("status", "" + HttpStatus.OK.value());
 		responseHeaders.set("CurrentTime", (new Date().toString()));
-		System.out.println("Secret info:: " + secretConfig.toString());
+		// System.out.println("Vault info:: " + vaultConfig.toString());
 		
 		Person p = new Person(id, "Krishna");
+			p.setOtherInfo(vaultConfig.toString() );
 		return new ResponseEntity<Person>(p, responseHeaders, HttpStatus.OK);
 	}
 

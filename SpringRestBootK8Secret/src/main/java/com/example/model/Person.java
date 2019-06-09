@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Person {
 
 	private String id;
-	private String firstName, lastName, phoneNumber;
+	private String firstName, lastName, phoneNumber, otherInfo;
 
 	public Person(String id, String firstName) {
 		this.id = id;
@@ -46,4 +46,11 @@ public class Person {
 		this.id = id;
 	}
 
+	public String getOtherInfo() {
+		return otherInfo;
+	}
+
+	public void setOtherInfo(String otherInfo) {
+		this.otherInfo = otherInfo;
+	}
 }

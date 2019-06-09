@@ -4,7 +4,7 @@ server:
      
 spring:
   application:
-    name: springrestbootk8s
+    name: springrestbootk8secret
  
 logging:
   level:

@@ -2,7 +2,7 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 ext {
-	springVersion = '2.1.1.RELEASE'
+	springVersion = '2.1.5.RELEASE'
     springCloudVersion = 'Finchley.SR2'
 	springCloudK8Version = '0.3.0.RELEASE'
 }
@@ -19,7 +19,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'war'
+// apply plugin: 'war'
 
 bootRun {
 	jvmArgs = ["-XX:MaxPermSize=256m", "-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
@@ -45,11 +45,10 @@ dependencies {
 	compile ("org.springframework.boot:spring-boot-starter-actuator")
 	compile("org.springframework.boot:spring-boot-configuration-processor")
 	compile ("org.springframework.cloud:spring-cloud-starter-kubernetes")
-	providedRuntime ("org.springframework.boot:spring-boot-starter-tomcat")
+	// providedRuntime ("org.springframework.boot:spring-boot-starter-tomcat")
 	testCompile ("org.springframework.boot:spring-boot-starter-test")
 }
 
-/*
 bootJar {
 	manifest {
 		attributes 'Start-Class': 'com.example.config.Application'
@@ -60,8 +59,8 @@ bootJar {
 	version '0.1.0'
 	archiveName 'springrestbootk8secret.jar'
 }
-*/
 
+/*
 bootWar {
 	excludeDevtools = false
 	manifest {
@@ -72,6 +71,7 @@ bootWar {
 	  version '0.1.0'
     archiveName 'springrestbootk8secret.war'
 }
+*/
 bootRun {
     main = 'com.example.config.Application'
     systemProperties = System.properties

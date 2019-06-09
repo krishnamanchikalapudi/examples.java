@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class K8SecretConfig {
-    public K8SecretConfig() {}
+public class VaultConfig {
+    public VaultConfig() {}
 
     @Value("${db.url}")
     private String dbUrl;

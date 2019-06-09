@@ -1,12 +1,16 @@
 # Pre-requisite
 - Java 1.8 or higher
-- [kubectl](https://github.com/kubernetes/kubectl)
 - gradle 4.0 or higher
+- [Docker](d)
+- [kubectl](https://github.com/kubernetes/kubectl)
 
 # Steps
-- [Setup & config Vault](./README-K8.MD)
-- Copy & paste 'root vault token' to src/main/resources/bootstrap.yml
-- [Gradle build instructions](./README-GRADLE.MD)
+- [Build jar](./build.sh)
+- [Gradle build & unit-test](./README-GRADLE.MD)
+- [Build Container image](./build.sh)
+- [Container run & unit-test](./README-DOCKER.MD)
+- [K8S Deploy & unit-test](./deployment/deploy.sh)
+- [K8S UnDeploy script](./deployment/undeploy.sh)
 - [API test instructions](./README-REST.MD)
 
 # Dev guidelines
