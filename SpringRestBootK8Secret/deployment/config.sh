@@ -1,5 +1,7 @@
 #!/bin/bash
 
+printf "\n\n\n%s\n\n\n" "----------- ----------- ----------- ----------- -----------  "
+
 DATE=`date +%Y-%m-%d`
 DATE_TIME=`date '+%Y-%m-%d %H:%M:%S'`
 
