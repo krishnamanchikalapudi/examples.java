@@ -15,7 +15,7 @@ gradle clean bootRun -Dserver.port=8080
 
 ### execute via java command
 `````
-java -jar build/libs/springrestbootk8secret.jar --server.port=8080 --db.url=jdbc:mysql://localhost:3306/springbootdb --db.username=HelloName --db.password=HelloPassword &
+java -jar build/libs/springrestbootk8envar.jar --server.port=8080 --db.url=jdbc:mysql://localhost:3306/springbootdb --db.username=HelloName --db.password=HelloPassword &
 `````
 
 ### mac - check process
@@ -25,7 +25,7 @@ lsof -nP -iTCP:8080 | awk '{print $2}'
 
 ### linux - check process
 `````
-ps -ef | grep springrestbootk8secret.jar | awk '{print $2}'
+ps -ef | grep springrestbootk8envar.jar | awk '{print $2}'
 netstat -lntp | grep 8080
 `````
 
@@ -37,7 +37,7 @@ curl localhost:8080/v1/
 ```
 - Response: body
 ```
-Welcome to Spring Rest + Boot + K8 Secret example 
+Welcome to Spring Rest + Boot + K8 environment variables example 
  
 ----------------------------------------
 Configuration properties

@@ -3,7 +3,7 @@ FROM openjdk:8-jdk-alpine
 MAINTAINER Krishna.Manchikalapudi@gmail.com
 
 # variables
-ENV JAR_FILE springrestbootk8secret.jar
+ENV JAR_FILE springrestbootk8envar.jar
 ENV BIN_JAR_FILE build/libs/${JAR_FILE}
 ENV TMP_LOC_FILE /tmp/${JAR_FILE}
 

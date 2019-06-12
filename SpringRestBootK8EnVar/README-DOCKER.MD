@@ -4,7 +4,7 @@
 
 ### Building the Docker image & patter 'docker build -t <YOUR_USERNAME>/<APP_NAME> .'
 `````
-docker image build -t springrestbootk8secret:latest .
+docker image build -t springrestbootk8envar:latest .
 `````
 
 output
@@ -15,7 +15,7 @@ Step 1/7 : FROM openjdk:8-jdk-alpine
 Step 2/7 : MAINTAINER Krishna.Manchikalapudi@gmail.com
  ---> Using cache
  ---> 7b9bca25a6bf
-Step 3/7 : ENV JAR_FILE springrestbootk8secret.jar
+Step 3/7 : ENV JAR_FILE springrestbootk8envar.jar
  ---> Using cache
  ---> 3ca30bb59428
 Step 4/7 : ENV BIN_JAR_FILE build/libs/${JAR_FILE}
@@ -36,12 +36,12 @@ Successfully built e723f56446b5
 
 ### Delete or Remove images
 `````
-docker image rm springrestbootk8secret
+docker image rm springrestbootk8envar
 `````
 
 ### Run a command in a new container & pattern  'docker container run -p 8888:5000 APP_NAME:latest
 `````
-docker container run -d -e db.url=jdbc:mysql://localhost:3306/springDocdb -e db.username=HelloDocName -e db.password=HelloDocPassword -p 8080:8080 springrestbootk8secret:latest &
+docker container run -d -e db.url=jdbc:mysql://localhost:3306/springDocdb -e db.username=HelloDocName -e db.password=HelloDocPassword -p 8080:8080 springrestbootk8envar:latest &
 `````
 
 ### List container command & pattern  'docker container ls -a'
@@ -51,21 +51,21 @@ docker container ls -a
 
 ### tail tail continuously
 `````
-container_id=`docker container ls -a | grep springrestbootk8secret | awk '{print $1}'`
+container_id=`docker container ls -a | grep springrestbootk8envar | awk '{print $1}'`
 docker logs --follow $container_id &
 `````
 
 ### Stop containers & pattern  'docker container stop CONTAINER_ID'
 `````
-container_id=`docker container ls -a | grep springrestbootk8secret | awk '{print $1}'`
+container_id=`docker container ls -a | grep springrestbootk8envar | awk '{print $1}'`
 docker container stop $container_id && docker system prune -f
 `````
 
 
 ### Push an image or a repository to a https://hub.docker.com & pattern 'docker push <hub-user>/<repo-name>:<tag>'
 `````
-docker tag springrestbootk8secret krishnamanchikalapudi/springrestbootk8secret
-docker push krishnamanchikalapudi/springrestbootk8secret
+docker tag springrestbootk8envar krishnamanchikalapudi/springrestbootk8envar
+docker push krishnamanchikalapudi/springrestbootk8envar
 `````
 
 
@@ -77,7 +77,7 @@ curl localhost:8080/v1/
 ```
 - Response: body
 ```
-Welcome to Spring Rest + Boot + K8 Secret example 
+Welcome to Spring Rest + Boot + K8 environment variables example 
  
 ----------------------------------------
 Configuration properties

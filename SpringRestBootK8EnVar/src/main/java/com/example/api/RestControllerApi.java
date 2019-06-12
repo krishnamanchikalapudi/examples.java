@@ -30,7 +30,7 @@ public class RestControllerApi {
 	public String home() {
 		// System.out.println("Vault info:: " + vaultConfig.toString());
 
-		StringBuilder sb = new StringBuilder("Welcome to Spring Rest + Boot + K8 Secret example \n ");
+		StringBuilder sb = new StringBuilder("Welcome to Spring Rest + Boot + K8 environment variables example \n ");
 			sb.append(vaultConfig.toString());
 
 		return sb.toString();

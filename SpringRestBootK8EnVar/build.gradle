@@ -55,9 +55,9 @@ bootJar {
 	}
     mainClassName 'com.example.config.Application'
 
-    baseName 'springrestbootk8secret'
+    baseName 'springrestbootk8envar'
 	version '0.1.0'
-	archiveName 'springrestbootk8secret.jar'
+	archiveName 'springrestbootk8envar.jar'
 }
 
 /*
@@ -67,9 +67,9 @@ bootWar {
 		attributes 'Start-Class': 'com.example.config.Application'
 	}
     mainClassName = 'com.example.config.Application'
-    baseName 'springrestbootk8secret'
+    baseName 'springrestbootk8envar'
 	  version '0.1.0'
-    archiveName 'springrestbootk8secret.war'
+    archiveName 'springrestbootk8envar.war'
 }
 */
 bootRun {

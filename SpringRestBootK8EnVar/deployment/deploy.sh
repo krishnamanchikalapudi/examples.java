@@ -42,10 +42,10 @@ pod_id=`kubectl get pods --namespace=${APP_NS} --ignore-not-found=true | awk 'FN
 printf "\n\n%s\n" " ------ POD ID: ${pod_id} "
 
 : '
-kubectl get pods --namespace=springrestbootk8secret-ns --ignore-not-found=true | awk 'FNR == 2 {print $1}'`
-kubectl logs --follow  springrestbootk8secret-deployment-55968f87b7-chlpn --ignore-not-found=true
+kubectl get pods --namespace=springrestbootk8envar-ns --ignore-not-found=true | awk 'FNR == 2 {print $1}'`
+kubectl logs --follow  springrestbootk8envar-deployment-55968f87b7-chlpn --ignore-not-found=true
 
-kubectl logs --since=1h springrestbootk8secret
+kubectl logs --since=1h springrestbootk8envar
 '
 
 sleep 2
