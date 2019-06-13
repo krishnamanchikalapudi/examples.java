@@ -60,7 +60,7 @@ metadata:
     kubernetes.io/ingress.allow-http: "true"
 spec:
   backend:
-    serviceName: springrestbootk8envar-secret
+    serviceName: springrestbootk8envar-service
     servicePort: 8080
 ---
 

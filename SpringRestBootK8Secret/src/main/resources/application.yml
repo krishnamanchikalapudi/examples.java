@@ -1,0 +1,13 @@
+server:
+   servlet:
+    context-path: /
+     
+spring:
+  application:
+    name: springrestbootk8secret
+ 
+logging:
+  level:
+    root: INFO
+  pattern:
+    console: "[%p] %d %c %M - %m%n"
