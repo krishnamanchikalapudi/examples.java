@@ -49,7 +49,7 @@ curl localhost:8080/v1/
 ```
 - Response: body
 ```
-Welcome to Spring Rest + Boot + K8 secret example 
+Welcome to Spring Rest + Boot + K8 environment variables example 
  
 ----------------------------------------
 Configuration properties
@@ -79,6 +79,7 @@ curl -H "content-type: application/json" localhost:8080/v1/123
 }
 ```
 
+
 ----------
 
 ### Namespace
@@ -107,7 +108,3 @@ curl -H "content-type: application/json" localhost:8080/v1/123
 ### Service - Ingress
 ![Ingress](./deployment/images/service-ingresses.png)
 ![Ingress Info](./deployment/images/service-ingresses-info.png)
-
-### Service - Secrets
-![Secrets](./deployment/images/service-secrets.png)
-![Secrets Info](./deployment/images/service-secrets-info.png)

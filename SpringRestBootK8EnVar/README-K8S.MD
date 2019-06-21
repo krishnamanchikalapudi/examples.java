@@ -78,3 +78,34 @@ curl -H "content-type: application/json" localhost:8080/v1/123
 	"otherInfo":"\n----------------------------------------\nConfiguration properties\n \t\t db.url = jdbc:mysql://localhost:3306/springK8Sdb\n \t\t db.username = helloK8sName\n \t\t db.password = HelloK8sPassword\n----------------------------------------\n"
 }
 ```
+
+
+----------
+
+### Namespace
+![Namespace](./deployment/images/namespace-k8s.png)
+
+
+### Project Namespace
+![Project Namespace](./deployment/images/namespace-project.png)
+
+### Service
+![Service](./deployment/images/service.png)
+![Service Info](./deployment/images/service-info.png)
+
+### Service - Deployment
+![Deployment](./deployment/images/service-deploy.png)
+![Deployment Info](./deployment/images/service-deploy-info.png)
+
+### Service - Pods
+![Pods](./deployment/images/service-pods.png)
+![Pods Info](./deployment/images/service-pods-info.png)
+
+### Service - Replica Sets
+![Replica Sets](./deployment/images/service-replicasets.png)
+![Replica Sets Info](./deployment/images/service-replicasets-info.png)
+
+### Service - Ingress
+![Ingress](./deployment/images/service-ingresses.png)
+![Ingress Info](./deployment/images/service-ingresses-info.png)
+
