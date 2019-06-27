@@ -4,7 +4,7 @@ server:
      
 spring:
   application:
-    name: springrest
+    name: springrestbootjwt
  
 jwt:
   header: Authorization

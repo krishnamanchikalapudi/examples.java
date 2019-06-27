@@ -15,6 +15,12 @@ public class JwtAuthenticationSuccessHandler implements AuthenticationSuccessHan
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) {
 		// Do do anything specific here
+
+		System.out.println("\n\t\t  ---- JWT Success ---- ");
+		System.out.println("name: " + authentication.getName());
+		System.out.println("tostring: " + authentication.toString());
+
+		System.out.println("\n\t\t  -------- ");
 	}
 
 }

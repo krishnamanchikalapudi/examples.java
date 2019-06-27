@@ -10,7 +10,9 @@ export APP_YAML=${APP_NAME}.yml
 export APP_NS=${APP_NAME}-ns
 export DOCKER_IMAGE='docker.io/krishnamanchikalapudi/springrestbootjwt:latest'
 export APP_PORT='8080'
-export APP_URL="localhost:${APP_PORT}/v1/"
+export APP_URL="localhost:${APP_PORT}/"
+export APP_URL_V1="${APP_URL}v1/"
+
 export JWT_KEY='eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLcmlzaG5hIiwidXNlcklkIjoiMTIzIiwicm9sZSI6ImFkbWluIn0.lCOQ-Q0lqxGrSqNMLLAVY7RG94klRoASbBhtddY1_F3fXoAU4-AxjQ1YUz6zJ_WK2dIB3YoHUCOcGSA2erUXkQ'
 
 printf "\n%s\n" "----------- [Java] INFO:  "

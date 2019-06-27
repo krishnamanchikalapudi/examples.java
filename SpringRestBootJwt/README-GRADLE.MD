@@ -36,5 +36,5 @@ ps -ef | grep springrestbootjwt.jar | awk '{print $2}'
 
 ### kill process
 `````
-kill $(lsof -t -i :8080) &
+kill -9 $(lsof -t -i :8080) &
 `````

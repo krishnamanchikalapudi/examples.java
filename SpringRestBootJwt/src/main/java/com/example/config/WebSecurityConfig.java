@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.example.constant.Constants;
 import com.example.security.JwtAuthenticationEntryPoint;
 import com.example.security.JwtAuthenticationProvider;
 import com.example.security.JwtAuthenticationSuccessHandler;
@@ -53,7 +54,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// we don't need CSRF because our token is invulnerable
 				.csrf().disable()
 				// All urls must be authenticated (filter for token always fires (/**)
-				.authorizeRequests().anyRequest().authenticated().and()
+				.authorizeRequests()
+				// all resource require Authorization:Bearer
+				// .anyRequest().authenticated().and()
+				// no Authorization Bearer key for /v1/liveStatus
+				.antMatchers(Constants.URL_LIVE_STATUS).permitAll()
+				// Authorization Bearer key require for all other urls
+				.antMatchers("/" + Constants.VERSION + "/**").authenticated()
+				// and
+				.and()
 				// Call our errorHandler if authentication/authorisation fails
 				.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				// don't create session
