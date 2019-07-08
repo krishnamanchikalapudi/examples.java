@@ -1,0 +1,17 @@
+server:
+   servlet:
+    context-path: /
+   port: 8080
+     
+spring:
+  application:
+    name: springoauth2
+  
+
+            
+logging:
+  level:
+    root: INFO
+    com.example.social: DEBUG
+  pattern:
+    console: "[%p] %d %c %M - %m%n"

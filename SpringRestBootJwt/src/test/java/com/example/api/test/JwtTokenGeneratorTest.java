@@ -23,7 +23,7 @@ public class JwtTokenGeneratorTest {
 		Person user = new Person();
 		user.setId(123L);
 		user.setUsername("Krishna");
-		user.setRole("admin");
+		user.setRole("role");
 
 		try {
 			Person u = new Person();

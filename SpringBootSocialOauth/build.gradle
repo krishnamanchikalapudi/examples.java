@@ -1,0 +1,76 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.6.RELEASE'
+	id 'java'
+}
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example.social'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.6.RELEASE'
+	implementation 'org.springframework.security:spring-security-oauth2-client'
+	implementation 'org.springframework.security:spring-security-oauth2-jose'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework:spring-test'
+}
+
+bootJar {
+	manifest {
+		attributes 'Start-Class': 'com.example.social.SpringOauthApplication'
+	}
+    mainClassName 'com.example.social.SpringOauthApplication'
+
+    baseName 'springoauth'
+	version '0.0.1'
+	archiveName 'springoauth.jar'
+}
+bootRun {
+    main = 'com.example.social.SpringOauthApplication'
+    systemProperties = System.properties
+	jvmArgs = ["-XX:MaxPermSize=256m", "-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java'
+		}
+		resources {
+			srcDir 'src/main/resources'
+		}
+	}
+	test {
+		java {
+			srcDir 'src/test/java'
+		}
+		resources {
+			srcDir 'src/test/resources'
+		}
+	}
+}
+
+tasks.withType(Test) {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+tasks.withType(JavaCompile) {
+    options.fork = true
+    options.incremental = true
+}
+
+task stage(dependsOn: ['build', 'clean'])
