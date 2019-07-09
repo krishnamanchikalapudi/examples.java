@@ -66,7 +66,7 @@ public class CustomRequestSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	// additional configuration for non-Spring Boot projects
-	private static List<String> clients = Arrays.asList("google", "facebook");
+	private static List<String> clients = Arrays.asList("google", "facebook", "github");
 
 	// @Bean
 	public ClientRegistrationRepository clientRegistrationRepository() {
@@ -94,7 +94,10 @@ public class CustomRequestSecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 		if (client.equals("facebook")) {
 			return CommonOAuth2Provider.FACEBOOK.getBuilder(client).clientId(clientId).clientSecret(clientSecret)
-					.build();
+					.authorizationUri("https://www.facebook.com/dialog/oauth").build();
+		}
+		if (client.equals("github")) {
+			return CommonOAuth2Provider.GITHUB.getBuilder(client).clientId(clientId).clientSecret(clientSecret).build();
 		}
 		return null;
 	}

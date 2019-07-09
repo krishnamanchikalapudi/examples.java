@@ -40,7 +40,8 @@ public class CustomAuthorizationRequestResolver implements OAuth2AuthorizationRe
 		Map<String, Object> extraParams = new HashMap<String, Object>();
 		extraParams.putAll(req.getAdditionalParameters()); // VIP note
 		extraParams.put("test", "extra");
-		System.out.println("here =====================");
+		System.out.println("here ===================== :\nAuthorizationRequestUri: " + req.getAuthorizationRequestUri()
+				+ "\n AuthorizationUri: " + req.getAuthorizationUri());
 		return OAuth2AuthorizationRequest.from(req).additionalParameters(extraParams).build();
 	}
 
@@ -48,10 +49,4 @@ public class CustomAuthorizationRequestResolver implements OAuth2AuthorizationRe
 		return OAuth2AuthorizationRequest.from(req).state("xyz").build();
 	}
 
-	private OAuth2AuthorizationRequest customizeOktaReq(OAuth2AuthorizationRequest req) {
-		Map<String, Object> extraParams = new HashMap<String, Object>();
-		extraParams.putAll(req.getAdditionalParameters());
-		extraParams.put("idp", "https://idprovider.com");
-		return OAuth2AuthorizationRequest.from(req).additionalParameters(extraParams).build();
-	}
 }

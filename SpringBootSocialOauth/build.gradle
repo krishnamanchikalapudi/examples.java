@@ -36,9 +36,9 @@ bootJar {
 	}
     mainClassName 'com.example.social.SpringOauthApplication'
 
-    baseName 'springoauth'
+    baseName 'springbootsocialoauth'
 	version '0.0.1'
-	archiveName 'springoauth.jar'
+	archiveName 'springbootsocialoauth.jar'
 }
 bootRun {
     main = 'com.example.social.SpringOauthApplication'

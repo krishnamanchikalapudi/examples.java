@@ -10,10 +10,15 @@
 <h3>
 <div class="label label-info">
    Welcome, <span th:text="${name}">user</span>!
+   
+   <br/>
+   Email: <span th:text="${email}" />
+   <br/>
+   Login from: <span th:text="${oauth2sys}" />
    </div>
    </h3>
    
    
-     <i>unauthorized page</i>
+     <i>authorized page</i>
 </body>
 </html>

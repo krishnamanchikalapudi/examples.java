@@ -3,5 +3,5 @@
 gradle clean build
 
 
-java -jar build/libs/springoauth.jar &
+java -jar build/libs/springbootsocialoauth.jar &
 
