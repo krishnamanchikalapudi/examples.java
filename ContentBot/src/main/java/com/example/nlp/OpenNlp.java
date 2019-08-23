@@ -50,10 +50,10 @@ public class OpenNlp {
 	 */
 	static {
 		questionAnswer.put("greeting", "Hello, how can I help you?");
-		questionAnswer.put("design-inquiry", "Design is already approved. Refer JIRA# EAW-1111111");
-		questionAnswer.put("library-inquiry", "Artrepo libaries approved");
 		questionAnswer.put("conversation-continue", "What else can I help you with?");
 		questionAnswer.put("conversation-complete", "Nice chatting with you. Bbye.");
+		questionAnswer.put("design-inquiry", "Design is already approved. Refer JIRA# EAW-1111111");
+		questionAnswer.put("library-inquiry", "Artrepo libaries approved");
 
 	}
 

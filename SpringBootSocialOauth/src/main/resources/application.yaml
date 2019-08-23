@@ -5,7 +5,7 @@ server:
      
 spring:
   application:
-    name: springoauth2
+    name: springbootsocialoauth2
   
 
             
