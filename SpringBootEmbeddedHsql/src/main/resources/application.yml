@@ -1,0 +1,22 @@
+server:
+   servlet:
+    context-path: /
+     
+spring:
+  application:
+    name: springbootembeddedhsql
+  datasource:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    url: jdbc:hsqldb:mem:testdb;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create    
+
+
+logging:
+  level:
+    root: INFO
+  pattern:
+    console: '%d{"yyyy/MM/dd HH:mm:ss,SSS"} [%p] [%t] %M\(%F:%L\) - %msg%n'

@@ -1,0 +1,6 @@
+greeting	 hi hi. hello how are you ? hey . hows it going good morning good evening good afternoon howdy 
+conversation-continue	 ok wow great ha g8 oh is it ? oh ohh Thats great Good Really na naa hmm lemme think hm hmmm hmmmmm what next yup yo yoyo
+conversation-complete	 Thanks done that's all thats it. chalo ok thats it I am done Thank you for information Thank. thanks. thank you. bye chai thanks nothing else thats it.
+firstrepublic-inquiry	 First Republic Bank frb
+wellsfargo-inquiry	 Wells Fargo WFC
+usbank-inquiry	 US Bank USB

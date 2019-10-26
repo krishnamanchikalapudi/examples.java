@@ -1,0 +1,44 @@
+<Categories>
+	<Category id="greeting">
+		<name><![CDATA[ Hello, how can I help you? ]]>
+		</name>
+	</Category>
+	<Category id="conversation-continue">
+		<name><![CDATA[  What else can I help you with?  ]]>
+		</name>
+	</Category>
+	<Category id="conversation-complete">
+		<name><![CDATA[  Nice chatting with you. bye!...  ]]>
+		</name>
+	</Category>
+	<Category id="wellsfargo-inquiry">
+		<name>Wells Fargo</name>
+		<tags>WFC Wells Fargo Bank Mortgage</tags>
+		<address>
+			<![CDATA[
+			333 market street, San Francisco
+			]]>
+		</address>
+		<status>OK</status>
+	</Category>
+	<Category id="firstrepublic-inquiry">
+		<name>First Republic</name>
+		<tags>FRB First Republic Wealth</tags>
+		<address>
+			<![CDATA[
+			111 pine street, San Francisco
+			]]>
+		</address>
+		<status>OK</status>
+	</Category>
+	<Category id="usbank-inquiry">
+		<name>US Bank</name>
+		<tags>USB US Bank</tags>
+		<address>
+			<![CDATA[
+			1 front street, San Francisco
+			]]>
+		</address>
+		<status>NOT OK</status>
+	</Category>
+</Categories>

@@ -1,0 +1,9 @@
+INSERT INTO addressbook VALUES (1, 'abc', 'abc@gmail.com');
+INSERT INTO addressbook VALUES (2, 'def', 'def@gmail.com');
+INSERT INTO addressbook VALUES (3, 'ghi', 'ghi@gmail.com');
+INSERT INTO addressbook VALUES (4, 'jkl', 'jkl@gmail.com');
+INSERT INTO addressbook VALUES (5, 'mno', 'mno@gmail.com');
+INSERT INTO addressbook VALUES (6, 'pqr', 'pqr@gmail.com');
+INSERT INTO addressbook VALUES (7, 'stu', 'stu@gmail.com');
+INSERT INTO addressbook VALUES (8, 'vwx', 'vwx@gmail.com');
+INSERT INTO addressbook VALUES (9, 'yz', 'yz@gmail.com');

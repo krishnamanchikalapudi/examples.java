@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: springrestbootredisk8s-ns
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springrestbootredisk8s-deployment
+  namespace: springrestbootredisk8s-ns
+spec:
+  selector:
+    matchLabels:
+      app: springrestbootredisk8s-app
+  replicas: 1 # tells deployment to run 3 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: springrestbootredisk8s-app
+    spec:
+      containers:
+      - name: springrestbootredisk8s-app
+        image: docker.io/krishnamanchikalapudi/springrestbootk8:latest
+        ports:
+        - containerPort: 8080
+          name: server
+        - containerPort: 8081
+          name: management
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springrestbootredisk8s-service
+  namespace: springrestbootredisk8s-ns
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    name: http
+  - port: 8081
+    targetPort: 8081
+    name: management
+  selector:
+    app: springrestbootredisk8s-app
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: springrestbootredisk8s-ingress
+  namespace: springrestbootredisk8s-ns
+  annotations:
+    kubernetes.io/ingress.allow-http: "true"
+spec:
+  backend:
+    serviceName: springrestbootredisk8s-service
+    servicePort: 8080
+---
