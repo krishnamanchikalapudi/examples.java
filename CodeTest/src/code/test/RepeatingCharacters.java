@@ -36,7 +36,7 @@ public class RepeatingCharacters {
 	}
 
 	public static void main(String[] args) {
-		String[] problems = new String[] { "abcabecbb", "aabcdeeab" };
+		String[] problems = new String[] { "abcabecbb", "aabcdeeab", "abcabcabc" };
 		RepeatingCharacters rc = new RepeatingCharacters();
 		for (String problem : problems) {
 			System.out.println("Input: " + problem);
