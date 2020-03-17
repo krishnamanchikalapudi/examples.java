@@ -26,13 +26,11 @@
 		<plugin.jib.version>1.0.1</plugin.jib.version>
 		<junit.version>4.12</junit.version>
 	</properties>
-	<modules>
-		<module>SpringRestBoot</module>
-	</modules>
-	
+
+
 	<dependencyManagement>
 		<dependencies>
-			
+
 
 		</dependencies>
 	</dependencyManagement>
@@ -361,7 +359,7 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
-			
+
 		</plugins>
 	</build>
 	<repositories>
