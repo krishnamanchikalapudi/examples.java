@@ -1,0 +1,12 @@
+on:
+  schedule:
+    - cron: "*/55 * * * *"
+
+name: Merge approved PR
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@develop
+      - name: merge
+        
