@@ -1,4 +1,5 @@
 # Java 'Spring Boot' Examples
+[![GitHub stars](https://img.shields.io/github/stars/krishnamanchikalapudi/examples.java.svg)](https://github.com/krishnamanchikalapudi/examples.java/stargazers)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkrishnamanchikalapudi%2Fexamples.java.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkrishnamanchikalapudi%2Fexamples.java?ref=badge_shield)
 
 
