@@ -1,6 +1,9 @@
 # Java 'Spring Boot' Examples
-[![GitHub stars](https://img.shields.io/github/stars/krishnamanchikalapudi/examples.java.svg)](https://github.com/krishnamanchikalapudi/examples.java/stargazers)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkrishnamanchikalapudi%2Fexamples.java.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkrishnamanchikalapudi%2Fexamples.java?ref=badge_shield)
+![GitHub language count](https://img.shields.io/github/languages/count/krishnamanchikalapudi/examples.java) 
+[![GitHub stars](https://img.shields.io/github/stars/krishnamanchikalapudi/examples.java.svg)](https://github.com/krishnamanchikalapudi/examples.java/stargazers) 
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/krishnamanchikalapudi/examples.java/develop) 
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/krishnamanchikalapudi/examples.java) 
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkrishnamanchikalapudi%2Fexamples.java.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkrishnamanchikalapudi%2Fexamples.java?ref=badge_shield) 
 
 
 ## Pre-requisite JDK 1.8 or higher
