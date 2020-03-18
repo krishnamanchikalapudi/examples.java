@@ -11,10 +11,12 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/krishnamanchikalapudi/examples.java?style=social)
 ![GitHub license](https://img.shields.io/github/license/krishnamanchikalapudi/examples.java)
 ### Build
-![Github Workflow](https://github.com/krishnamanchikalapudi/examples.java/workflows/maven/badge.svg)
+![Github Workflow - compile](https://github.com/krishnamanchikalapudi/examples.java/workflows/maven/badge.svg)
+![Github Workflow - PR merge](https://github.com/krishnamanchikalapudi/examples.java/workflows/.github/workflows/automerge/badge.svg)
 ### Issues
 ![GitHub issues](https://img.shields.io/github/issues/krishnamanchikalapudi/examples.java)
 ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/krishnamanchikalapudi/examples.java)
+![DepShield Badge](https://depshield.sonatype.org/badges/krishnamanchikalapudi/examples.java/depshield.svg)
 
 
 ## Pre-requisite JDK 1.8 or higher
