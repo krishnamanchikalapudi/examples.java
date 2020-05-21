@@ -9,7 +9,7 @@
 	<name>Helidon MP Simple example</name>
 	<properties>
 		<mainClass> com.examples.helidon.Bootstrap</mainClass>
-		<helidon-microprofile.version>1.4.0</helidon-microprofile.version>
+		<helidon-microprofile.version>1.4.4</helidon-microprofile.version>
 		<jersey-media-json-binding.version>2.26</jersey-media-json-binding.version>
 		<junit.jupiter.version>5.5.2</junit.jupiter.version>
 	</properties>
