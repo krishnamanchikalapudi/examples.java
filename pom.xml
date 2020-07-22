@@ -12,7 +12,6 @@
 		<spring.version>2.2.7.RELEASE</spring.version>
 		<jackson.dataformat.version>2.11.0</jackson.dataformat.version>
 		<swagger2.version>2.10.5</swagger2.version>
-
 		<plugin.docker.version>0.21.0</plugin.docker.version>
 		<plugin.spotbugs.version>3.1.9</plugin.spotbugs.version>
 		<plugin.cobertura.version>2.7</plugin.cobertura.version>
