@@ -11,13 +11,13 @@
 		<reports.outputDirectory>${basedir}/target/reports</reports.outputDirectory>
 		<spring.version>2.2.7.RELEASE</spring.version>
 		<jackson.dataformat.version>2.11.1</jackson.dataformat.version>
-		<swagger2.version>2.10.5</swagger2.version>
+		<swagger2.version>3.0.0</swagger2.version>
 		<plugin.docker.version>0.21.0</plugin.docker.version>
-		<plugin.spotbugs.version>3.1.9</plugin.spotbugs.version>
+		<plugin.spotbugs.version>4.0.4</plugin.spotbugs.version>
 		<plugin.cobertura.version>2.7</plugin.cobertura.version>
 		<plugin.surefire.version>3.0.0-M3</plugin.surefire.version>
 		<plugin.checkstyle.version>3.0.0</plugin.checkstyle.version>
-		<plugin.owasp.version>5.0.0-M1</plugin.owasp.version>
+		<plugin.owasp.version>5.3.2</plugin.owasp.version>
 		<plugin.jarsigner.version>3.0.0</plugin.jarsigner.version>
 		<plugin.pdf.version>1.4</plugin.pdf.version>
 		<plugin.jar.version>3.1.1</plugin.jar.version>
