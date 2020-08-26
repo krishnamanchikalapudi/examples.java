@@ -15,7 +15,7 @@
 		<plugin.docker.version>0.21.0</plugin.docker.version>
 		<plugin.spotbugs.version>4.0.4</plugin.spotbugs.version>
 		<plugin.cobertura.version>2.7</plugin.cobertura.version>
-		<plugin.surefire.version>3.0.0-M3</plugin.surefire.version>
+		<plugin.surefire.version>3.0.0-M5</plugin.surefire.version>
 		<plugin.checkstyle.version>3.0.0</plugin.checkstyle.version>
 		<plugin.owasp.version>5.3.2</plugin.owasp.version>
 		<plugin.jarsigner.version>3.0.0</plugin.jarsigner.version>
@@ -23,7 +23,7 @@
 		<plugin.jar.version>3.1.1</plugin.jar.version>
 		<plugin.project-info.version>3.1.0</plugin.project-info.version>
 		<plugin.jib.version>1.0.1</plugin.jib.version>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13</junit.version>
 	</properties>
 
 
@@ -82,7 +82,7 @@
 				<!-- mvn site -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>2.1</version>
+				<version>3.9.1</version>
 				<configuration>
 					<outputDirectory>${reports.outputDirectory}/site</outputDirectory>
 				</configuration>
