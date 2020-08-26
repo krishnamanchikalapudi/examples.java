@@ -13,7 +13,7 @@
 		<jackson.dataformat.version>2.11.1</jackson.dataformat.version>
 		<swagger2.version>2.10.5</swagger2.version>
 		<plugin.docker.version>0.21.0</plugin.docker.version>
-		<plugin.spotbugs.version>3.1.9</plugin.spotbugs.version>
+		<plugin.spotbugs.version>4.0.4</plugin.spotbugs.version>
 		<plugin.cobertura.version>2.7</plugin.cobertura.version>
 		<plugin.surefire.version>3.0.0-M3</plugin.surefire.version>
 		<plugin.checkstyle.version>3.0.0</plugin.checkstyle.version>
