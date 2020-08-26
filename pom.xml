@@ -82,7 +82,7 @@
 				<!-- mvn site -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>2.1</version>
+				<version>3.9.1</version>
 				<configuration>
 					<outputDirectory>${reports.outputDirectory}/site</outputDirectory>
 				</configuration>
