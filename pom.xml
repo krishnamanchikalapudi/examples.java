@@ -9,7 +9,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<reports.outputDirectory>${basedir}/target/reports</reports.outputDirectory>
-		<spring.version>2.6.0</spring.version>
+		<spring.version>2.6.1</spring.version>
 
 		<jackson.dataformat.version>2.13.0</jackson.dataformat.version>
 		<swagger2.version>3.0.0</swagger2.version>
@@ -20,7 +20,7 @@
 		<plugin.checkstyle.version>3.1.2</plugin.checkstyle.version>
 		<plugin.owasp.version>6.5.0</plugin.owasp.version>
 		<plugin.jarsigner.version>3.0.0</plugin.jarsigner.version>
-		<plugin.pdf.version>1.4</plugin.pdf.version>
+		<plugin.pdf.version>1.5.1</plugin.pdf.version>
 		<plugin.jar.version>3.1.1</plugin.jar.version>
 		<plugin.project-info.version>3.1.2</plugin.project-info.version>
 		<plugin.jib.version>3.1.4</plugin.jib.version>
