@@ -18,7 +18,7 @@
 		<plugin.cobertura.version>2.7</plugin.cobertura.version>
 		<plugin.surefire.version>3.0.0-M5</plugin.surefire.version>
 		<plugin.checkstyle.version>3.1.2</plugin.checkstyle.version>
-		<plugin.owasp.version>7.0.1</plugin.owasp.version>
+		<plugin.owasp.version>7.0.4</plugin.owasp.version>
 		<plugin.jarsigner.version>3.0.0</plugin.jarsigner.version>
 		<plugin.pdf.version>1.5.1</plugin.pdf.version>
 		<plugin.jar.version>3.1.1</plugin.jar.version>
