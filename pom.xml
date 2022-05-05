@@ -20,7 +20,7 @@
 		<plugin.checkstyle.version>3.1.2</plugin.checkstyle.version>
 		<plugin.owasp.version>7.0.4</plugin.owasp.version>
 		<plugin.jarsigner.version>3.0.0</plugin.jarsigner.version>
-		<plugin.pdf.version>1.5.1</plugin.pdf.version>
+		<plugin.pdf.version>1.6.0</plugin.pdf.version>
 		<plugin.jar.version>3.1.1</plugin.jar.version>
 		<plugin.project-info.version>3.2.2</plugin.project-info.version>
 		<plugin.jib.version>3.2.1</plugin.jib.version>
