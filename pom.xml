@@ -9,21 +9,20 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<reports.outputDirectory>${basedir}/target/reports</reports.outputDirectory>
-		<spring.version>2.6.5</spring.version>
-
-		<jackson.dataformat.version>2.13.2</jackson.dataformat.version>
+		<spring.version>2.7.0</spring.version>
+		<jackson.dataformat.version>2.13.3</jackson.dataformat.version>
 		<swagger2.version>3.0.0</swagger2.version>
 		<plugin.docker.version>0.21.0</plugin.docker.version>
-		<plugin.spotbugs.version>4.6.0.0</plugin.spotbugs.version>
+		<plugin.spotbugs.version>4.7.0.0</plugin.spotbugs.version>
 		<plugin.cobertura.version>2.7</plugin.cobertura.version>
-		<plugin.surefire.version>3.0.0-M5</plugin.surefire.version>
+		<plugin.surefire.version>3.0.0-M6</plugin.surefire.version>
 		<plugin.checkstyle.version>3.1.2</plugin.checkstyle.version>
-		<plugin.owasp.version>7.0.4</plugin.owasp.version>
+		<plugin.owasp.version>7.1.0</plugin.owasp.version>
 		<plugin.jarsigner.version>3.0.0</plugin.jarsigner.version>
-		<plugin.pdf.version>1.5.1</plugin.pdf.version>
+		<plugin.pdf.version>1.6.0</plugin.pdf.version>
 		<plugin.jar.version>3.1.1</plugin.jar.version>
-		<plugin.project-info.version>3.2.2</plugin.project-info.version>
-		<plugin.jib.version>3.1.4</plugin.jib.version>
+		<plugin.project-info.version>3.3.0</plugin.project-info.version>
+		<plugin.jib.version>3.2.1</plugin.jib.version>
 		<junit.version>4.13.2</junit.version>
 	</properties>
 
@@ -83,7 +82,7 @@
 				<!-- mvn site -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.11.0</version>
+				<version>3.12.0</version>
 				<configuration>
 					<outputDirectory>${reports.outputDirectory}/site</outputDirectory>
 				</configuration>
