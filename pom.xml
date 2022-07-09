@@ -26,10 +26,8 @@
 		<junit.version>4.13.2</junit.version>
 	</properties>
 
-
 	<dependencyManagement>
 		<dependencies>
-
 
 		</dependencies>
 	</dependencyManagement>
