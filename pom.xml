@@ -16,7 +16,7 @@
 		<plugin.spotbugs.version>4.7.3.0</plugin.spotbugs.version>
 		<plugin.cobertura.version>2.7</plugin.cobertura.version>
 		<plugin.surefire.version>3.0.0</plugin.surefire.version>
-		<plugin.checkstyle.version>3.2.1</plugin.checkstyle.version>
+		<plugin.checkstyle.version>3.2.2</plugin.checkstyle.version>
 		<plugin.owasp.version>8.2.1</plugin.owasp.version>
 		<plugin.jarsigner.version>3.0.0</plugin.jarsigner.version>
 		<plugin.pdf.version>1.6.1</plugin.pdf.version>
