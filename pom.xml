@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<reports.outputDirectory>${basedir}/target/reports</reports.outputDirectory>
 		<spring.version>3.2.1</spring.version>
-		<jackson.dataformat.version>2.16.0</jackson.dataformat.version>
+		<jackson.dataformat.version>2.16.1</jackson.dataformat.version>
 		<swagger2.version>3.0.0</swagger2.version>
 		<plugin.docker.version>0.21.0</plugin.docker.version>
 		<plugin.spotbugs.version>4.8.2.0</plugin.spotbugs.version>
