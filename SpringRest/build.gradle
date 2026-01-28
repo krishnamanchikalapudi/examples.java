@@ -1,26 +1,29 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework:spring-webmvc:5.0.2.RELEASE")
-        classpath("javax.servlet:javax.servlet-api:3.1.0")
-    }
+plugins {
+  id 'java'
+  id 'org.springframework.boot' version '4.0.1'
+  id 'io.spring.dependency-management' version '1.1.7'
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'war'
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(25)
+  }
+}
 
 repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 dependencies {
-    compile ("org.springframework:spring-webmvc:5.0.2.RELEASE")
-    compile("javax.servlet:javax.servlet-api:3.1.0")
-  
+    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.19.4'
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+  useJUnitPlatform()
 }

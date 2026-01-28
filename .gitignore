@@ -38,6 +38,10 @@ build/*
 target/
 /target
 /target/*
+.gradle
+.gradle/**
+**/.gradle
+**/.gradle/**
 
 # misc
 /.sass-cache
@@ -50,4 +54,6 @@ testem.log
 
 # System Files
 .DS_Store
+**/.DS_Store
 Thumbs.db
+**/Thumbs.db

@@ -1,14 +1,25 @@
-# Eclipse
+# Spring Rest Service
+
+## Pre-requisites
+- Java 25+
+- Gradle 8+
+
+## Eclipse
 `````
 gradle cleanEclipseClasspath eclipse
 `````
 
-# Clean Build
+## Clean Build
 `````
-gradle clean build
+./run.sh build
 `````
 
-# Clean war
+## run
 `````
-gradle clean war
+./run.sh
+`````
+
+## test
+`````
+./run.sh test
 `````
