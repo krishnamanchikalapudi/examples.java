@@ -1,6 +1,10 @@
 # compiled output
 .vscode
 .vscode/
+.claude
+.claude/
+.cursor
+.cursor/
 *.code-workspace
 .gradle
 .gradle/

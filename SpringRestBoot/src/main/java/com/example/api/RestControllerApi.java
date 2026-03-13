@@ -1,7 +1,5 @@
 package com.example.api;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 
 import org.springframework.http.HttpHeaders;
@@ -17,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
 import com.example.constant.Constants;
 import com.example.model.Person;
 
 @RestController
-@EnableSwagger2
 public class RestControllerApi {
 
 	@RequestMapping(value = { Constants.URL_HOME }, method = RequestMethod.GET)
@@ -32,20 +27,21 @@ public class RestControllerApi {
 	}
 
 	@RequestMapping(value = { Constants.URL_BY_ID }, method = RequestMethod.GET, consumes = {
-			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public @ResponseBody ResponseEntity<Person> jsonId(@PathVariable String id, @RequestHeader HttpHeaders reqHeaders) {
-		System.out.println("USER: content-type: " + reqHeaders.getContentType().toString());
-		
+			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, Constants.APPLICATION_TOON }, produces = {
+					MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, Constants.APPLICATION_TOON })
+	public @ResponseBody ResponseEntity<Person> jsonId(@PathVariable String id,
+			@RequestHeader HttpHeaders reqHeaders) {
+		System.out.println("USER: content-type: " + reqHeaders.getContentType());
 		return id(id, reqHeaders);
 	}
 
 	private ResponseEntity<Person> id(String id, HttpHeaders reqHeaders) {
-		MultiValueMap<String, String> responseHeaders = new LinkedMultiValueMap<String, String>();
-		responseHeaders.set("status", "" + HttpStatus.OK.value());
-		responseHeaders.set("CurrentTime", (new Date().toString()));
+		MultiValueMap<String, String> responseHeaders = new LinkedMultiValueMap<>();
+		responseHeaders.set("status", String.valueOf(HttpStatus.OK.value()));
+		responseHeaders.set("CurrentTime", new Date().toString());
 
 		Person p = new Person(id, "Krishna");
-		return new ResponseEntity<Person>(p, responseHeaders, HttpStatus.OK);
+		return new ResponseEntity<>(p, responseHeaders, HttpStatus.OK);
 	}
 
 }

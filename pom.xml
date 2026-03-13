@@ -9,26 +9,35 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<reports.outputDirectory>${basedir}/target/reports</reports.outputDirectory>
-		<spring.version>3.3.1</spring.version>
-		<jackson.dataformat.version>2.17.2</jackson.dataformat.version>
-		<swagger2.version>3.0.0</swagger2.version>
+		<java.version>25</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<spring.version>4.0.3</spring.version>
+		<jackson.dataformat.version>2.18.2</jackson.dataformat.version>
+		<springdoc.version>2.8.0</springdoc.version>
 		<plugin.docker.version>0.21.0</plugin.docker.version>
-		<plugin.spotbugs.version>4.8.6</plugin.spotbugs.version>
+		<plugin.spotbugs.version>4.8.6.6</plugin.spotbugs.version>
 		<plugin.cobertura.version>2.7</plugin.cobertura.version>
-		<plugin.surefire.version>3.3.0</plugin.surefire.version>
-		<plugin.checkstyle.version>3.3.1</plugin.checkstyle.version>
-		<plugin.owasp.version>9.2.0</plugin.owasp.version>
+		<plugin.surefire.version>3.5.2</plugin.surefire.version>
+		<plugin.checkstyle.version>3.4.0</plugin.checkstyle.version>
+		<plugin.owasp.version>10.0.4</plugin.owasp.version>
 		<plugin.jarsigner.version>3.0.0</plugin.jarsigner.version>
 		<plugin.pdf.version>1.6.1</plugin.pdf.version>
-		<plugin.jar.version>3.1.1</plugin.jar.version>
-		<plugin.project-info.version>3.6.0</plugin.project-info.version>
-		<plugin.jib.version>3.4.3</plugin.jib.version>
-		<junit.version>4.13.2</junit.version>
+		<plugin.jar.version>3.4.1</plugin.jar.version>
+		<plugin.project-info.version>3.8.0</plugin.project-info.version>
+		<plugin.jib.version>3.4.4</plugin.jib.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-
+			<!-- Spring Boot BOM — manages all spring-boot dependency versions -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
@@ -36,24 +45,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<version>${spring.version}</version>
-		</dependency><dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-dependencies</artifactId>
-			<version>${spring.version}</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency><dependency>
+		</dependency>
+		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
-			<version>${jackson.dataformat.version}</version>
-		</dependency><dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${swagger2.version}</version>
-		</dependency><dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>${swagger2.version}</version>
+		</dependency>
+		<!-- SpringDoc OpenAPI for Spring Boot 4.x -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc.version}</version>
 		</dependency>
 		<!-- SCOPE : runtime -->
 		<dependency>
@@ -61,16 +62,19 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<version>${spring.version}</version>
 			<scope>runtime</scope>
-		</dependency><!-- SCOPE : test -->
+		</dependency>
+		<!-- SCOPE : test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<version>${spring.version}</version>
 			<scope>test</scope>
-		</dependency><dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
+		</dependency>
+		<!-- Spring Boot 4.x: MockMvc test slice moved to spring-boot-starter-webmvc-test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -356,26 +360,32 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<parameters>true</parameters>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<repositories>
 		<repository>
 			<id>mavenRepoCentral</id>
 			<name>mavenRepoCentral</name>
-			<url>http://central.maven.org/maven2</url>
+			<url>https://repo.maven.apache.org/maven2</url>
 		</repository>
 		<repository>
 			<id>springRepoCentral</id>
 			<name>springRepoCentral</name>
-			<url>http://repo.spring.io/release</url>
+			<url>https://repo.spring.io/release</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>mavenPluginCentral</id>
 			<name>mavenPluginCentral</name>
-			<url>http://central.maven.org/maven2</url>
+			<url>https://repo.maven.apache.org/maven2</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>springPluginCentral</id>

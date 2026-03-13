@@ -1,64 +1,103 @@
 package com.example.api.test;
 
-import org.junit.Test;
-
 import com.example.model.Person;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+
+import javax.crypto.SecretKey;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * convenience class to generate a token for testing your requests. Make sure
- * the used secret here matches the on in your application.yml
+ * Generates and validates JWT tokens for testing.
+ * Ensure jwt.secret in application.yml matches the key used here.
  */
-public class JwtTokenGeneratorTest {
+@DisplayName("JWT Token Generator Tests")
+class JwtTokenGeneratorTest {
 
-	private String jwtSecret = "example-secret-key";
+	// Base64-encoded 512-bit key matching application.yml
+	private static final String JWT_SECRET =
+			"U3ByaW5nQm9vdDRKd3RTZWNyZXRLZXlGb3JUZXN0aW5nVGhpc0lzQTUxMkJpdExvbmdTZWNyZXRLZXlYWFhYWA==";
 
-	@Test
-	public void testGenerateToken() throws Exception {
-
-		Person user = new Person();
-		user.setId(123L);
-		user.setUsername("Krishna");
-		user.setRole("role");
-
-		try {
-			Person u = new Person();
-			Claims claims = Jwts.claims().setSubject(u.getUsername());
-			claims.put("userId", u.getId() + "");
-			claims.put("role", u.getRole());
-
-			String authToken = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
-			System.out.println("*************** GENERATE TOKEN ***********************\n\n" + authToken
-					+ "\n\n**************************************");
-		} catch (JwtException e) {
-			// Simply print the exception and null will be returned for the userDto
-			e.printStackTrace();
-		}
-
+	private SecretKey getSigningKey() {
+		return Keys.hmacShaKeyFor(Decoders.BASE64.decode(JWT_SECRET));
 	}
 
 	@Test
+	@DisplayName("Generate JWT token for a user and print it")
+	void testGenerateToken() {
+		Person user = new Person();
+		user.setId(123L);
+		user.setUsername("Krishna");
+		user.setRole("admin");
 
-	public void testDisplayAuthToken() throws Exception {
-		String authToken = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLcmlzaG5hIiwidXNlcklkIjoiMTIzIiwicm9sZSI6ImFkbWluIn0.lCOQ-Q0lqxGrSqNMLLAVY7RG94klRoASbBhtddY1_F3fXoAU4-AxjQ1YUz6zJ_WK2dIB3YoHUCOcGSA2erUXkQ";
-		Person u = null;
-		try {
-			Claims body = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody();
+		Claims claims = Jwts.claims()
+				.subject(user.getUsername())
+				.add("userId", String.valueOf(user.getId()))
+				.add("role", user.getRole())
+				.build();
 
-			u = new Person();
-			u.setUsername(body.getSubject());
-			u.setId(Long.parseLong((String) body.get("userId")));
-			u.setRole((String) body.get("role"));
+		String authToken = Jwts.builder()
+				.claims(claims)
+				.signWith(getSigningKey(), Jwts.SIG.HS512)
+				.compact();
 
-			System.out.println("*************** Auth TOKEN ***********************\n\n" + u.toString()
-					+ "\n\n**************************************");
-		} catch (JwtException e) {
-			// Simply print the exception and null will be returned for the userDto
-			e.printStackTrace();
-		}
+		assertNotNull(authToken);
+		assertFalse(authToken.isEmpty());
+		System.out.println("Generated Token:\n" + authToken);
+	}
+
+	@Test
+	@DisplayName("Parse a valid JWT token and extract user details")
+	void testParseToken() {
+		Person user = new Person();
+		user.setId(456L);
+		user.setUsername("TestUser");
+		user.setRole("role");
+
+		Claims createdClaims = Jwts.claims()
+				.subject(user.getUsername())
+				.add("userId", String.valueOf(user.getId()))
+				.add("role", user.getRole())
+				.build();
+
+		String token = Jwts.builder()
+				.claims(createdClaims)
+				.signWith(getSigningKey(), Jwts.SIG.HS512)
+				.compact();
+
+		Claims parsed = Jwts.parser()
+				.verifyWith(getSigningKey())
+				.build()
+				.parseSignedClaims(token)
+				.getPayload();
+
+		Person parsedUser = new Person();
+		parsedUser.setUsername(parsed.getSubject());
+		parsedUser.setId(Long.parseLong((String) parsed.get("userId")));
+		parsedUser.setRole((String) parsed.get("role"));
+
+		assertEquals("TestUser", parsedUser.getUsername());
+		assertEquals(456L, parsedUser.getId());
+		assertEquals("role", parsedUser.getRole());
+	}
+
+	@Test
+	@DisplayName("Parsing a tampered token throws JwtException")
+	void testTamperedToken_ThrowsException() {
+		String tamperedToken = "eyJhbGciOiJIUzUxMiJ9.tampered.signature";
+		assertThrows(JwtException.class, () ->
+				Jwts.parser()
+						.verifyWith(getSigningKey())
+						.build()
+						.parseSignedClaims(tamperedToken)
+		);
 	}
 }

@@ -19,10 +19,7 @@ import com.example.constant.Constants;
 import com.example.model.Person;
 import com.example.model.Status;
 
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
 @RestController
-@EnableSwagger2
 public class RestControllerApi {
 
 	@RequestMapping(value = { Constants.URL_HOME }, method = RequestMethod.GET)

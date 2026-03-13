@@ -1,88 +1,91 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.0.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
 group = 'com.example.aws'
 version = '0.0.1-SNAPSHOT'
 
-buildscript {
-	ext {
-		springVersion = '2.1.6.RELEASE'
-	}
-    repositories {
-        mavenCentral()
-        maven { url 'http://repo.spring.io/plugins-release' }
-    }
-    dependencies {
-         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springVersion}")
-    }
+java {
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
 bootRun {
-	jvmArgs = ["-XX:MaxPermSize=256m", "-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
+    jvmArgs = ["-XX:+HeapDumpOnOutOfMemoryError", "-Dfile.encoding=UTF-8"]
 }
 
 repositories {
     mavenCentral()
-    maven { url 'http://repo.spring.io/libs-release' }
+    maven { url 'https://repo.spring.io/release' }
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+ext {
+    jjwtVersion = '0.12.6'
+}
+
+dependencyManagement {
+    applyMavenExclusions = false
+}
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.8')
-	compile('io.springfox:springfox-swagger-ui:2.9.2')
-	compile('io.springfox:springfox-swagger2:2.9.2')
-	compile('io.jsonwebtoken:jjwt:0.9.1')
-	//providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.boot:spring-boot-starter-actuator')
+    implementation('com.fasterxml.jackson.dataformat:jackson-dataformat-xml')
+    // SpringDoc OpenAPI replaces Springfox
+    implementation('org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0')
+    // JJWT 0.12.x (split into api / impl / jackson)
+    implementation("io.jsonwebtoken:jjwt-api:${jjwtVersion}")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:${jjwtVersion}")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:${jjwtVersion}")
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    // Spring Boot 4.x: @WebMvcTest / MockMvc moved to webmvc-test artifact
+    testImplementation('org.springframework.boot:spring-boot-starter-webmvc-test')
+    testImplementation('org.springframework.security:spring-security-test')
 }
 
 bootJar {
-	manifest {
-		attributes 'Start-Class': 'com.example.config.Application'
-	}
-    mainClassName 'com.example.config.Application'
-
-    baseName 'springrestbootjwt'
-	version '0.1.0'
-	archiveName 'springrestbootjwt.jar'
+    manifest {
+        attributes 'Start-Class': 'com.example.config.Application'
+    }
+    mainClass = 'com.example.config.Application'
+    archiveBaseName = 'springrestbootjwt'
+    archiveVersion = '0.1.0'
+    archiveFileName = 'springrestbootjwt.jar'
 }
+
 bootRun {
-    main = 'com.example.config.Application'
+    mainClass = 'com.example.config.Application'
     systemProperties = System.properties
 }
 
 sourceSets {
-	main {
-		java {
-			srcDir 'src/main/java'
-		}
-		resources {
-			srcDir 'src/main/resources'
-		}
-	}
-	test {
-		java {
-			srcDir 'src/test/java'
-		}
-		resources {
-			srcDir 'src/test/resources'
-		}
-	}
+    main {
+        java { srcDir 'src/main/java' }
+        resources { srcDir 'src/main/resources' }
+    }
+    test {
+        java { srcDir 'src/test/java' }
+        resources { srcDir 'src/test/resources' }
+    }
 }
 
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 }
-tasks.withType(JavaCompile) {
+
+tasks.withType(JavaCompile).configureEach {
     options.fork = true
     options.incremental = true
 }
 
-task stage(dependsOn: ['build', 'clean'])
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.register('stage') {
+    dependsOn 'build', 'clean'
+}

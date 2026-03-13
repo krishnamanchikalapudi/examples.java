@@ -1,28 +1,9 @@
 # Spring Rest Service
 
-
-### GET url: http://localhost:8080/v1/
-- Request: header
-```
-```
-- Request: body
-```
-```
-- Response: header
-```
-```
-- Response: body
-```
-Welcome to Spring Rest + Boot example
-```
-
 ### GET url: http://localhost:8080/v1/123
-- Request: header
+- Sample Request
 ```
-content-type:application/json
-```
-- Request: body
-```
+curl -H "content-type:text/toon" http://localhost:8080/v1/123
 ```
 - Response: header
 ```
@@ -39,13 +20,28 @@ content-type:application/json
 ```
 
 ### GET url: http://localhost:8080/v1/123
-- Request: header
+- Sample Request
 ```
-Accept:application/xml
-Content-Type:application/xml
+curl -H "content-type:application/json" http://localhost:8080/v1/123
 ```
-- Request: body
+- Response: header
 ```
+	status: 200
+	CurrentTime: 
+	
+```
+- Response: body
+```
+{
+    "id": "123",
+    "firstName": "Krishna"
+}
+```
+
+### GET url: http://localhost:8080/v1/123
+- Sample Request
+```
+curl -H "content-type:application/xml" http://localhost:8080/v1/123
 ```
 - Response: header
 ```

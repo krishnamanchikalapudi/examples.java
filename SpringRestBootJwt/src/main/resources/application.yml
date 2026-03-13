@@ -8,7 +8,8 @@ spring:
  
 jwt:
   header: Authorization
-  secret: example-secret-key
+  # Base64-encoded 512-bit key for HS512 signing (change in production)
+  secret: U3ByaW5nQm9vdDRKd3RTZWNyZXRLZXlGb3JUZXN0aW5nVGhpc0lzQTUxMkJpdExvbmdTZWNyZXRLZXlYWFhYWA==
 
 logging:
   level:

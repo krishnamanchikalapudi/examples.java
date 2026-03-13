@@ -1,4 +1,4 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.0 Chrome/140.0.7339.249 Electron/38.7.2 Safari/537.36" version="29.3.0">
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.5.2 Chrome/142.0.7444.265 Electron/39.6.1 Safari/537.36" version="29.5.2" pages="2">
   <diagram name="NIST" id="4bfNo9V3fCMUMsWawhIL">
     <mxGraphModel dx="1861" dy="941" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
@@ -92,6 +92,20 @@
         </mxCell>
         <mxCell id="i-o91WvaJZhET3LJYCC8-41" parent="1" style="whiteSpace=wrap;html=1;align=left;" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;References:&lt;/font&gt;&lt;/b&gt;&lt;div&gt;*&amp;nbsp;https://www.nist.gov/cyberframework&lt;/div&gt;&lt;div&gt;*&amp;nbsp;https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html&lt;/div&gt;" vertex="1">
           <mxGeometry height="90" width="510" x="290" y="697" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="etgv1QrXySIxvvXyPqfV" name="Page-2">
+    <mxGraphModel dx="932" dy="712" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="3EqiX0R1QFbyItptZ5Gb-3" parent="1" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://complianceforge.com/content/images/heatmap-cybersecurity-frameworks-comparison.png;" value="" vertex="1">
+          <mxGeometry height="825" width="1200" x="320" y="13" as="geometry" />
+        </mxCell>
+        <mxCell id="3EqiX0R1QFbyItptZ5Gb-4" parent="1" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://assets.isu.pub/document-structure/240627035318-c920ee51de495874fb6c9fd8cf160597/v1/bfdda8ab9bd236d32016587138d1b230.jpeg;" value="" vertex="1">
+          <mxGeometry height="1200" width="857" x="540" y="940" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
